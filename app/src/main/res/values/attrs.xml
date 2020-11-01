@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="BottomBarButton">
+        <attr name="src" format="reference" />
+        <attr name="src_activate" format="reference"/>
+        <attr name="text" format="string" localization="suggested"/>
+    </declare-styleable>
+</resources>

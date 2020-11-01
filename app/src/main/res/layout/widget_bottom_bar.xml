@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/linearLayout"
+    android:background="@drawable/border_top_line_black"
+    android:columnCount="2"
+    android:gravity="center"
+    android:orientation="horizontal">
+
+    <Space
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="0.3" />
+
+    <com.example.andorid_toss_clone.widget.BottomBarButton
+        android:id="@+id/btnHome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:src="@drawable/home"
+        app:src_activate="@drawable/home_activate"
+        app:text="@string/home" />
+
+    <Space
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="1" />
+
+    <com.example.andorid_toss_clone.widget.BottomBarButton
+        android:id="@+id/btnConsumption"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:src="@drawable/calendar"
+        app:src_activate="@drawable/calendar_activate"
+        app:text="@string/consumption" />
+
+    <Space
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="1" />
+
+    <com.example.andorid_toss_clone.widget.BottomBarButton
+        android:id="@+id/btnRecommendation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:src="@drawable/recommendation"
+        app:src_activate="@drawable/recommendation_activate"
+        app:text="@string/recommendation" />
+
+    <Space
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="1" />
+
+
+    <com.example.andorid_toss_clone.widget.BottomBarButton
+        android:id="@+id/btnAll"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:src="@drawable/order"
+        app:src_activate="@drawable/order_activate"
+        app:text="@string/all" />
+
+    <Space
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="0.3" />
+
+</LinearLayout>
