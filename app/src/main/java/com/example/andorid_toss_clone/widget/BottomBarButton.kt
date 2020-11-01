@@ -1,5 +1,6 @@
 package com.example.andorid_toss_clone.widget
 
+import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Build
@@ -81,6 +82,12 @@ class BottomBarButton(context: Context, attrs: AttributeSet) : FrameLayout(conte
         } else {
             imageView.setImageResource(src)
             textView.setTextColor(defaultColor)
+        }
+
+        val moveValue = 8f * if (activate) -1 else 1
+        ObjectAnimator.ofFloat(imageView, "translationY", moveValue).apply {
+            duration = 200
+            start()
         }
 
         this.activate = activate

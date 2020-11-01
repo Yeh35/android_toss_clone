@@ -8,6 +8,10 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <color name="bottom_bar_button_activate">#3D76BB</color>
+    <color name="bottom_bar_button_activate">#3182f7</color>
     <color name="bottom_bar_button">#000000</color>
+
+    <color name="default_background">#dee2e5</color>
+    <color name="default_line">#dee2e5</color>
+    <color name="default_text">#353e4d</color>
 </resources>
