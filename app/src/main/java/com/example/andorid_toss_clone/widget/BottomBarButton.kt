@@ -84,11 +84,12 @@ class BottomBarButton(context: Context, attrs: AttributeSet) : FrameLayout(conte
             textView.setTextColor(defaultColor)
         }
 
-        val moveValue = 8f * if (activate) -1 else 1
-        ObjectAnimator.ofFloat(imageView, "translationY", moveValue).apply {
-            duration = 200
-            start()
-        }
+        // 버전이 바뀌면서 위로 이동하는게 사라짐..ㅠㅜ
+//        val moveValue = 8f * if (activate) -1 else 1
+//        ObjectAnimator.ofFloat(imageView, "translationY", moveValue).apply {
+//            duration = 200
+//            start()
+//        }
 
         this.activate = activate
     }
