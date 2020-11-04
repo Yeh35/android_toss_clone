@@ -1,4 +1,4 @@
-package com.example.andorid_toss_clone.page
+package com.example.andorid_toss_clone.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

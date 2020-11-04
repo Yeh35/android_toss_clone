@@ -1,4 +1,4 @@
-package com.example.andorid_toss_clone.page
+package com.example.andorid_toss_clone.activity
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity

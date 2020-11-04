@@ -4,4 +4,6 @@
     <string name="consumption">내 소비</string>
     <string name="all">전체</string>
     <string name="recommendation">추천</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
