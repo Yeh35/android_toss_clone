@@ -1,11 +1,12 @@
-package com.example.andorid_toss_clone.activity
+package com.example.andorid_toss_clone.view.activity
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.andorid_toss_clone.R
 
-class IntroActivity : AppCompatActivity() {
+class IntroActivity : BaseActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_intro)

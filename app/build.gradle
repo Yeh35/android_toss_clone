@@ -8,8 +8,12 @@ android {
     compileSdkVersion 29
     buildToolsVersion "30.0.2"
 
-    dataBinding {
-        enabled = true
+    buildFeatures {
+        dataBinding = true
+    }
+
+    buildFeatures {
+        dataBinding = true
     }
 
     defaultConfig {
