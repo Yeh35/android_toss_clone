@@ -1,9 +1,8 @@
-package com.example.andorid_toss_clone.view.activity
+package me.sangoh.clone.toss.android.view.activity
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.andorid_toss_clone.R
+import com.example.toss.R
 
 class IntroActivity : BaseActivity() {
 

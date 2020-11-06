@@ -1,4 +1,4 @@
-package com.example.andorid_toss_clone.view.fragment
+package me.sangoh.clone.toss.android.view.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater

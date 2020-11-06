@@ -1,4 +1,4 @@
-package com.example.andorid_toss_clone
+package me.sangoh.clone.toss.android
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

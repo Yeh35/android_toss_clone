@@ -9,7 +9,7 @@
     android:gravity="center"
     android:orientation="horizontal">
 
-    <com.example.andorid_toss_clone.widget.BottomBarButton
+    <me.sangoh.clone.toss.android.widget.BottomBarButton
         android:id="@+id/btnHome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -18,7 +18,7 @@
         app:src_activate="@drawable/home_activate"
         app:text="@string/home" />
 
-    <com.example.andorid_toss_clone.widget.BottomBarButton
+    <me.sangoh.clone.toss.android.widget.BottomBarButton
         android:id="@+id/btnConsumption"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -28,7 +28,7 @@
         app:text="@string/consumption" />
 
 
-    <com.example.andorid_toss_clone.widget.BottomBarButton
+    <me.sangoh.clone.toss.android.widget.BottomBarButton
         android:id="@+id/btnRecommendation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -38,7 +38,7 @@
         app:text="@string/recommendation" />
 
 
-    <com.example.andorid_toss_clone.widget.BottomBarButton
+    <me.sangoh.clone.toss.android.widget.BottomBarButton
         android:id="@+id/btnAll"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

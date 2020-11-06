@@ -1,26 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.andorid_toss_clone">
-
-    <!--전화 권한-->
-    <uses-permission android:name="android.permission.READ_PHONE_NUMBERS"/>
-    <uses-permission android:name="android.permission.CALL_PHONE"/>
-
-    <!-- 저장공간 -->
+    package="com.example.toss">
+    <!-- 전화 권한 -->
+    <uses-permission android:name="android.permission.READ_PHONE_NUMBERS" />
+    <uses-permission android:name="android.permission.CALL_PHONE" /> <!-- 저장공간 -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-
-    <!--연락처 권한-->
-    <uses-permission android:name="android.permission.READ_CONTACTS"/>
-
-    <!--위치 권한-->
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-
-    <!--네트워크 권한-->
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> <!-- 연락처 권한 -->
+    <uses-permission android:name="android.permission.READ_CONTACTS" /> <!-- 위치 권한 -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" /> <!-- 네트워크 권한 -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
     <application
         android:allowBackup="true"
@@ -29,14 +20,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Andorid_toss_clone">
-        <activity android:name="com.example.andorid_toss_clone.view.activity.IntroActivity">
+        <activity android:name="com.example.toss.me.example.toss.view.activity.WelcomeActivity"></activity>
+        <activity android:name="com.example.toss.me.example.toss.view.activity.IntroActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.example.andorid_toss_clone.view.activity.MainActivity">
-        </activity>
+        <activity android:name="com.example.toss.me.example.toss.view.activity.MainActivity"></activity>
     </application>
 
 </manifest>

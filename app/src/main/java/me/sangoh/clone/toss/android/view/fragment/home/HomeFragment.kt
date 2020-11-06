@@ -1,13 +1,13 @@
-package com.example.andorid_toss_clone.view.fragment.home
+package me.sangoh.clone.toss.android.view.fragment.home
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import com.example.andorid_toss_clone.R
-import com.example.andorid_toss_clone.databinding.FragmentHomeBinding
-import com.example.andorid_toss_clone.view.fragment.BaseFragment
+import com.example.toss.R
+import com.example.toss.databinding.FragmentHomeBinding
+import me.sangoh.clone.toss.android.view.fragment.BaseFragment
 
 class HomeFragment : BaseFragment() {
 

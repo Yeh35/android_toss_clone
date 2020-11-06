@@ -1,21 +1,12 @@
-package com.example.andorid_toss_clone.widget
+package me.sangoh.clone.toss.android.widget
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.content.res.Resources
-import android.graphics.Paint
-import android.graphics.Paint.ANTI_ALIAS_FLAG
-import android.os.Build
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.FrameLayout
-import android.widget.ImageView
-import android.widget.TextView
-import androidx.annotation.RequiresApi
-import androidx.core.content.res.getResourceIdOrThrow
-import androidx.core.content.res.getStringOrThrow
-import com.example.andorid_toss_clone.R
+import com.example.toss.R
 
 @SuppressLint("AppCompatCustomView", "UseCompatLoadingForDrawables")
 class BottomBar(context: Context, attrs: AttributeSet) : FrameLayout(context, attrs), View.OnClickListener {

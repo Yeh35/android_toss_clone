@@ -1,4 +1,4 @@
-package com.example.andorid_toss_clone.view
+package me.sangoh.clone.toss.android.view
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel

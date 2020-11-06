@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:viewBindingIgnore="true"
-        tools:context=".view.fragment.home.HomeFragment">
+        tools:context="com.example.toss.me.example.toss.view.fragment.home.HomeFragment">
 
         <TextView
             android:id="@+id/text"
