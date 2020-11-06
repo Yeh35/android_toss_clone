@@ -7,11 +7,16 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="blue">#3182f7</color>
 
     <color name="bottom_bar_button_activate">#30394a</color>
     <color name="bottom_bar_button">#d0d4d8</color>
 
+
     <color name="default_background">#dee2e5</color>
     <color name="default_line">#dee2e5</color>
     <color name="default_text">#353e4d</color>
+
+
+
 </resources>

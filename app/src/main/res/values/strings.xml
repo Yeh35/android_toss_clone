@@ -6,4 +6,8 @@
     <string name="recommendation">추천</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="welcome_title">금융의 모든 것\n토스에서 간편하게</string>
+    <string name="welcome_subtitle">토스는 안전합니다.\n누적 다운로드 %s만, 누적 보안 사고 %s건</string>
+    <string name="to_start">시작하기</string>
+    <string name="privacy_mode_working">개인 정보 보호 모드 작동 중</string>
 </resources>
