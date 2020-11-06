@@ -1,33 +1,49 @@
 package me.sangoh.clone.toss.android.view.activity.welcome
 
-import android.graphics.Color
-import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.Spannable
-import android.text.SpannableString
-import android.text.style.ForegroundColorSpan
-import android.widget.TextView
-import androidx.annotation.RequiresApi
-import androidx.databinding.BindingAdapter
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.example.toss.R
 import com.example.toss.databinding.ActivityWelcomeBinding
-import java.text.DecimalFormat
+import kotlinx.coroutines.launch
+import me.sangoh.clone.toss.android.utils.animationAppearWhileComingUp
+import me.sangoh.clone.toss.android.utils.animationRotateSidewaysAndHighlight
+import me.sangoh.clone.toss.android.view.activity.BaseActivity
 
-class WelcomeActivity : AppCompatActivity() {
+class WelcomeActivity : BaseActivity() {
+
+    private lateinit var binding: ActivityWelcomeBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_welcome)
 
-        val binding: ActivityWelcomeBinding = DataBindingUtil.setContentView(
+        binding = DataBindingUtil.setContentView(
             this,
             R.layout.activity_welcome
         )
 
         val viewModel: WelcomeViewModel = ViewModelProvider(this).get(WelcomeViewModel::class.java)
         binding.viewModel = viewModel
+    }
+
+
+    override fun onResume() {
+        super.onResume()
+
+        Thread(Runnable {
+            scopeMain.launch {
+                animationAppearWhileComingUp(binding.layoutForAnimation)
+            }
+
+            Thread.sleep(1500)
+
+            scopeMain.launch {
+                animationRotateSidewaysAndHighlight(binding.ivGuard)
+            }
+        }).start()
+
     }
 }
 
