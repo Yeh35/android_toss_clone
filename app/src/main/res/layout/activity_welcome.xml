@@ -10,7 +10,7 @@
             type="me.sangoh.clone.toss.android.view.activity.welcome.WelcomeViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context="me.sangoh.clone.toss.android.view.activity.welcome.WelcomeActivity">
@@ -18,11 +18,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:layout_height="match_parent">
 
             <TextView
                 android:id="@+id/tv_title"
@@ -108,11 +104,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/transparent_gray"
-            app:layoutDescription="@xml/motion_permission_scene"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layoutDescription="@xml/motion_permission_scene">
 
             <LinearLayout
                 android:id="@+id/layout_permission_base"
@@ -149,7 +141,7 @@
 
         </androidx.constraintlayout.motion.widget.MotionLayout>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 </layout>
 
