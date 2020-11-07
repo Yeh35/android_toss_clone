@@ -56,7 +56,6 @@
                 android:layout_marginEnd="20dp"
                 android:layout_marginBottom="22dp"
                 android:background="@drawable/rounded_blue_button"
-                android:onClick="onClickStart"
                 android:text="@string/to_start"
                 android:textColor="@color/white"
                 android:textSize="16sp"
@@ -137,7 +136,6 @@
                     android:textSize="16sp" />
 
             </LinearLayout>
-
 
         </androidx.constraintlayout.motion.widget.MotionLayout>
 
