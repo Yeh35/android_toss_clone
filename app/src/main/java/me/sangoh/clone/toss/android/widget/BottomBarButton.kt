@@ -55,12 +55,14 @@ class BottomBarButton(context: Context, attrs: AttributeSet) : FrameLayout(conte
         defaultColor = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             resources.getColor(R.color.bottom_bar_button, null)
         } else {
+            @Suppress("DEPRECATION")
             resources.getColor(R.color.bottom_bar_button)
         }
 
         activateColor = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             resources.getColor(R.color.bottom_bar_button_activate, null)
         } else {
+            @Suppress("DEPRECATION")
             resources.getColor(R.color.bottom_bar_button_activate)
         }
 

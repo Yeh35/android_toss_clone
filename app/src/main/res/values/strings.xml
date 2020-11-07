@@ -10,5 +10,13 @@
     <string name="welcome_toss_is_safe">토스는 안전합니다.</string>
     <string name="welcome_boast">다운로드 %s, 누적 보안 사고 %s</string>
     <string name="to_start">시작하기</string>
+    <string name="to_continue">계속하기</string>
     <string name="privacy_mode_working">개인 정보 보호 모드 작동 중</string>
+    <string name="permission_please">앱 사용을 위해 권한을 허용해주세요\n꼭 필요한 권한만 받아요</string>
+    <string name="call">전화</string>
+    <string name="permission_call_description">휴대폰 번호로 본인 인증을 합니다.</string>
+    <string name="address_book">주소록</string>
+    <string name="permission_address_book_description">등록된 사진을 불러오고 수수료 무료로 송금,\n친구 초대 혜택을 받을 수 있습니다.\n이를 위해 주소록 정보를 토스 서버에 보냅니다.</string>
+    <string name="storage">저장공간</string>
+    <string name="permission_storage_description">공인인증서로 로그인하고,\n입금 확인증이나 QR코드를 저장합니다.</string>
 </resources>

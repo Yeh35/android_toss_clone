@@ -1,7 +1,8 @@
 package me.sangoh.clone.toss.android.view.activity.welcome
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import android.view.View
+import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.example.toss.R
@@ -14,6 +15,7 @@ import me.sangoh.clone.toss.android.view.activity.BaseActivity
 class WelcomeActivity : BaseActivity() {
 
     private lateinit var binding: ActivityWelcomeBinding
+    private lateinit var motion: MotionLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,6 +28,10 @@ class WelcomeActivity : BaseActivity() {
 
         val viewModel: WelcomeViewModel = ViewModelProvider(this).get(WelcomeViewModel::class.java)
         binding.viewModel = viewModel
+
+//        motion = binding.includeMotion.findViewById(R.id.motion_base)
+//        binding.includeMotion.
+//        binding.motionBase.transitionToEnd()
     }
 
 
@@ -43,7 +49,10 @@ class WelcomeActivity : BaseActivity() {
                 animationRotateSidewaysAndHighlight(binding.ivGuard)
             }
         }).start()
+    }
 
+    fun onClickStart(view: View) {
+        motion.transitionToStart()
     }
 }
 
