@@ -2,14 +2,15 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.toss">
-    <!-- 전화 권한 -->
+
+    <!-- 권한 -->
     <uses-permission android:name="android.permission.READ_PHONE_NUMBERS" />
-    <uses-permission android:name="android.permission.CALL_PHONE" /> <!-- 저장공간 -->
+    <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> <!-- 연락처 권한 -->
-    <uses-permission android:name="android.permission.READ_CONTACTS" /> <!-- 위치 권한 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" /> <!-- 네트워크 권한 -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
@@ -20,7 +21,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Andorid_toss_clone">
-        <activity android:name="me.sangoh.clone.toss.android.view.activity.login.LoginActivity"></activity>
+
+        <activity android:name="me.sangoh.clone.toss.android.view.activity.login.LoginActivity"/>
         <activity android:name="me.sangoh.clone.toss.android.view.activity.welcome.WelcomeActivity" />
         <activity android:name="me.sangoh.clone.toss.android.view.activity.IntroActivity">
             <intent-filter>

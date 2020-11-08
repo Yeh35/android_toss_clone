@@ -6,4 +6,22 @@
     android:layout_height="match_parent"
     tools:context="me.sangoh.clone.toss.android.view.activity.login.LoginActivity">
 
+    <TextView
+        style="@style/MainTextView"
+        android:id="@+id/tv_title"
+        android:layout_marginStart="26dp"
+        android:layout_marginTop="72dp"
+        android:text="@string/please_Input_name"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        style="@style/BlueButton"
+        android:id="@+id/btn_ok"
+        android:text="@string/ok"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
