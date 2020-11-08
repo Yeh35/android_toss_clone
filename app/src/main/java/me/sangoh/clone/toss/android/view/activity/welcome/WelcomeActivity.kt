@@ -1,6 +1,7 @@
 package me.sangoh.clone.toss.android.view.activity.welcome
 
 import android.content.DialogInterface
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -10,14 +11,21 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.toss.R
 import com.example.toss.databinding.ActivityWelcomeBinding
 import kotlinx.coroutines.launch
-import me.sangoh.clone.toss.android.utils.animationAppearWhileComingUp
-import me.sangoh.clone.toss.android.utils.animationRotateSidewaysAndHighlight
 import me.sangoh.clone.toss.android.view.activity.BaseActivity
 import me.sangoh.clone.toss.android.view.dialog.CustomAlarmDialog
+import android.Manifest
+import android.content.Intent
+import android.net.Uri
+import android.provider.Settings
+import me.sangoh.clone.toss.android.utils.*
+import me.sangoh.clone.toss.android.view.activity.login.LoginActivity
 
 class WelcomeActivity : BaseActivity(), MotionLayout.TransitionListener, View.OnClickListener {
 
+    private val RESULT_CODE_SETTING = 20105
+
     private lateinit var binding: ActivityWelcomeBinding
+    private var permissionDeniedCount = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -62,13 +70,12 @@ class WelcomeActivity : BaseActivity(), MotionLayout.TransitionListener, View.On
         Log.d("Welcome", "onTransitionCompleted currentId(${currentId})")
         when (currentId) {
             R.id.start -> {
-
-                val alarm = CustomAlarmDialog(this, DialogInterface.OnClickListener { dialogInterface, _ ->
-                    dialogInterface.cancel()
-                })
-                alarm.show()
+                if (requestPermissions()) {
+                    nextStep()
+                }
             }
-            R.id.end -> { }
+            R.id.end -> {
+            }
             else -> error("정의되지 않은 상태")
         }
     }
@@ -86,6 +93,95 @@ class WelcomeActivity : BaseActivity(), MotionLayout.TransitionListener, View.On
         }
     }
 
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        // 성공시 0,  -1,
+
+        if (permissions.size < 0) {
+            return
+        }
+
+        val title: String
+        val description: String
+
+        for (i in 0..permissions.size) {
+            if (grantResults[i] == PackageManager.PERMISSION_GRANTED) {
+                continue
+            }
+
+            permissionDeniedCount++
+
+            when (permissions[i]) {
+                Manifest.permission.READ_PHONE_NUMBERS -> {
+                    title = resources.getString(R.string.please_allow_access)
+                    description =
+                        resources.getString(R.string.please_allow_access_making_and_managing_calls)
+                }
+                Manifest.permission.READ_CONTACTS -> {
+                    title = resources.getString(R.string.please_allow_access)
+                    description = resources.getString(R.string.please_allow_access_read_contacts)
+                }
+                Manifest.permission.READ_EXTERNAL_STORAGE,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE -> {
+                    title = resources.getString(R.string.please_allow_access)
+                    description = resources.getString(R.string.please_allow_access_storage)
+                }
+                else -> {
+                    error("정의되지 않은 요청입니다.")
+                }
+            }
+
+            val alarm = CustomAlarmDialog(
+                this,
+                title,
+                description,
+                DialogInterface.OnClickListener { _, _ ->
+
+                    if (permissionDeniedCount > 2) {
+                        val intent = Intent(
+                            Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
+                            Uri.fromParts("package", packageName, null)
+                        )
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                        startActivityForResult(intent, RESULT_CODE_SETTING)   // 6
+                    } else {
+                        requestPermissions()
+                    }
+                })
+            alarm.show()
+            return
+        }
+
+        //전부 pass 한경우
+        nextStep()
+
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == PERMISSION_REQUEST_CODE) {
+            requestPermissions()
+        }
+    }
+
+    private fun requestPermissions(): Boolean {
+        var resultBoolean = true
+        resultBoolean = resultBoolean && requestReadPhoneNumbersPermission(this)
+        resultBoolean = resultBoolean && requestReadContactsPermission(this)
+        resultBoolean = resultBoolean && requestStoragePermission(this)
+        return resultBoolean
+    }
+
+    private fun nextStep() {
+        val startIntent = Intent(this, LoginActivity::class.java)
+        startActivity(startIntent)
+        this.finish()
+    }
 }
 
 

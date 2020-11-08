@@ -2,6 +2,7 @@ package me.sangoh.clone.toss.android.view.dialog
 
 import android.app.Activity
 import android.app.Dialog
+import android.content.ClipDescription
 import android.content.DialogInterface
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -19,18 +20,26 @@ class CustomAlarmDialog : Dialog, View.OnClickListener {
     }
 
     private val activity: Activity
+    private val title: String
+    private val description: String
     private val onOkClickLiner: DialogInterface.OnClickListener
     private val onNoClickLiner: DialogInterface.OnClickListener?
 
     private lateinit var btnYes: TextView
     private lateinit var btnNo: TextView
+    private lateinit var tvTitle: TextView
+    private lateinit var tvDescription: TextView
 
     constructor(
         activity: Activity,
+        title: String,
+        description: String,
         onOkClickLiner: DialogInterface.OnClickListener,
         onNoClickLiner: DialogInterface.OnClickListener?
     ) : super(activity) {
-        this.activity = activity;
+        this.activity = activity
+        this.title = title
+        this.description = description
         this.onOkClickLiner = onOkClickLiner
         this.onNoClickLiner = onNoClickLiner
 
@@ -39,8 +48,10 @@ class CustomAlarmDialog : Dialog, View.OnClickListener {
 
     constructor(
         activity: Activity,
+        title: String,
+        description: String,
         onOkClickLiner: DialogInterface.OnClickListener
-    ) : this(activity, onOkClickLiner, null)
+    ) : this(activity, title, description, onOkClickLiner, null)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,9 +59,14 @@ class CustomAlarmDialog : Dialog, View.OnClickListener {
         setContentView(R.layout.dialog_custom_alarm)
 
         btnYes = findViewById(R.id.btn_yes)
-        btnYes.setOnClickListener(this)
-
         btnNo = findViewById(R.id.btn_no)
+        tvTitle = findViewById(R.id.tv_title)
+        tvDescription = findViewById(R.id.tv_description)
+
+
+        tvTitle.text = title
+        tvDescription.text = description
+        btnYes.setOnClickListener(this)
         btnNo.setOnClickListener(this)
 
         if (onNoClickLiner == null) {
@@ -59,6 +75,8 @@ class CustomAlarmDialog : Dialog, View.OnClickListener {
     }
 
     override fun onClick(view: View?) {
+        this.cancel()
+
         when (view) {
             btnYes -> onOkClickLiner.onClick(this, OK)
             btnNo -> onNoClickLiner!!.onClick(this, NO)
