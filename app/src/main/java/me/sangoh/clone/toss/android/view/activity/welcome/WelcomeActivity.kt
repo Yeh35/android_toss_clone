@@ -1,5 +1,6 @@
 package me.sangoh.clone.toss.android.view.activity.welcome
 
+import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -12,6 +13,7 @@ import kotlinx.coroutines.launch
 import me.sangoh.clone.toss.android.utils.animationAppearWhileComingUp
 import me.sangoh.clone.toss.android.utils.animationRotateSidewaysAndHighlight
 import me.sangoh.clone.toss.android.view.activity.BaseActivity
+import me.sangoh.clone.toss.android.view.dialog.CustomAlarmDialog
 
 class WelcomeActivity : BaseActivity(), MotionLayout.TransitionListener, View.OnClickListener {
 
@@ -33,7 +35,7 @@ class WelcomeActivity : BaseActivity(), MotionLayout.TransitionListener, View.On
         binding.motionBase.setTransitionListener(this)
 
         binding.btnStart.setOnClickListener(this)
-
+        binding.btnContinue.setOnClickListener(this)
     }
 
     override fun onResume() {
@@ -52,27 +54,37 @@ class WelcomeActivity : BaseActivity(), MotionLayout.TransitionListener, View.On
         }).start()
     }
 
-    override fun onTransitionTrigger(p0: MotionLayout?, p1: Int, p2: Boolean, p3: Float) {
-        Log.d("Welcome", "onTransitionTrigger")
-    }
+    override fun onTransitionTrigger(p0: MotionLayout?, p1: Int, p2: Boolean, p3: Float) {}
+    override fun onTransitionStarted(p0: MotionLayout?, p1: Int, p2: Int) {}
+    override fun onTransitionChange(p0: MotionLayout?, p1: Int, p2: Int, p3: Float) {}
 
-    override fun onTransitionStarted(p0: MotionLayout?, p1: Int, p2: Int) {
-        Log.d("Welcome", "onTransitionStarted")
-    }
+    override fun onTransitionCompleted(motionLayout: MotionLayout, currentId: Int) {
+        Log.d("Welcome", "onTransitionCompleted currentId(${currentId})")
+        when (currentId) {
+            R.id.start -> {
 
-    override fun onTransitionChange(p0: MotionLayout?, p1: Int, p2: Int, p3: Float) {
-        Log.d("Welcome", "onTransitionChange")
-    }
-
-    override fun onTransitionCompleted(p0: MotionLayout?, p1: Int) {
-        Log.d("Welcome", "onTransitionCompleted")
+                val alarm = CustomAlarmDialog(this, DialogInterface.OnClickListener { dialogInterface, _ ->
+                    dialogInterface.cancel()
+                })
+                alarm.show()
+            }
+            R.id.end -> { }
+            else -> error("정의되지 않은 상태")
+        }
     }
 
     override fun onClick(view: View?) {
-        binding.motionBase.visibility = View.VISIBLE
-        binding.motionBase.transitionToEnd()
+        when (view) {
+            binding.btnStart -> {
+                binding.motionBase.visibility = View.VISIBLE
+                binding.motionBase.transitionToEnd()
+            }
+            binding.btnContinue -> {
+                binding.motionBase.visibility = View.VISIBLE
+                binding.motionBase.transitionToStart()
+            }
+        }
     }
-
 
 }
 
