@@ -83,12 +83,14 @@ class WelcomeActivity : BaseActivity(), MotionLayout.TransitionListener, View.On
     override fun onClick(view: View?) {
         when (view) {
             binding.btnStart -> {
-                binding.motionBase.visibility = View.VISIBLE
-                binding.motionBase.transitionToEnd()
+//                binding.motionBase.visibility = View.VISIBLE
+//                binding.motionBase.transitionToEnd()
+                binding.motionBase.show()
             }
             binding.btnContinue -> {
-                binding.motionBase.visibility = View.VISIBLE
-                binding.motionBase.transitionToStart()
+//                binding.motionBase.visibility = View.VISIBLE
+//                binding.motionBase.transitionToStart()
+                binding.motionBase.close()
             }
         }
     }
