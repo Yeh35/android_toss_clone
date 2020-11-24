@@ -87,46 +87,11 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-<!--        <androidx.constraintlayout.motion.widget.MotionLayout-->
-<!--            android:id="@+id/motion_base"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:background="@color/transparent_gray"-->
-<!--            app:layoutDescription="@xml/motion_permission_scene">-->
-
         <me.sangoh.clone.toss.android.widget.layout.StickySlideLayout
             android:id="@+id/motion_base"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layoutDescription="@xml/widget_sticky_slide_view_scene">
-
-            <LinearLayout
-                android:id="@+id/layout_permission_base"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/rounded_white_layout"
-                android:orientation="vertical">
-<!--                app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                app:layout_constraintEnd_toEndOf="parent"-->
-<!--                app:layout_constraintStart_toStartOf="parent"-->
-
-                <include
-                    android:id="@+id/include_permission"
-                    layout="@layout/layout_permission"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-
-                <Button
-                    style="@style/BlueButton"
-                    android:id="@+id/btn_continue"
-                    android:layout_marginTop="16dp"
-                    android:text="@string/to_continue"/>
-
-            </LinearLayout>
-
-        </me.sangoh.clone.toss.android.widget.layout.StickySlideLayout>
-
-<!--        </androidx.constraintlayout.motion.widget.MotionLayout>-->
+            app:layoutDescription="@xml/widget_sticky_slide_view_scene"/>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

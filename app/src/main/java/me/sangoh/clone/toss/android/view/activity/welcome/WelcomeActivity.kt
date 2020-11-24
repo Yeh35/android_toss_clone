@@ -14,9 +14,13 @@ import kotlinx.coroutines.launch
 import me.sangoh.clone.toss.android.view.activity.BaseActivity
 import me.sangoh.clone.toss.android.view.dialog.CustomAlarmDialog
 import android.Manifest
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.provider.Settings
+import android.view.LayoutInflater
+import android.widget.Button
+import android.widget.FrameLayout
 import me.sangoh.clone.toss.android.utils.*
 import me.sangoh.clone.toss.android.view.activity.login.LoginActivity
 
@@ -26,6 +30,8 @@ class WelcomeActivity : BaseActivity(), MotionLayout.TransitionListener, View.On
 
     private lateinit var binding: ActivityWelcomeBinding
     private var permissionDeniedCount = 0
+
+    private lateinit var btnContinue: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,8 +48,14 @@ class WelcomeActivity : BaseActivity(), MotionLayout.TransitionListener, View.On
         binding.motionBase.visibility = View.GONE
         binding.motionBase.setTransitionListener(this)
 
+        val li = this.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+        val layoutPermission = li.inflate(R.layout.layout_permission, binding.motionBase, false)
+        binding.motionBase.addView(layoutPermission)
+
+        btnContinue = layoutPermission.findViewById(R.id.btn_continue)
+
         binding.btnStart.setOnClickListener(this)
-        binding.btnContinue.setOnClickListener(this)
+        btnContinue.setOnClickListener(this)
     }
 
     override fun onResume() {
@@ -87,7 +99,7 @@ class WelcomeActivity : BaseActivity(), MotionLayout.TransitionListener, View.On
 //                binding.motionBase.transitionToEnd()
                 binding.motionBase.show()
             }
-            binding.btnContinue -> {
+            btnContinue -> {
 //                binding.motionBase.visibility = View.VISIBLE
 //                binding.motionBase.transitionToStart()
                 binding.motionBase.close()
