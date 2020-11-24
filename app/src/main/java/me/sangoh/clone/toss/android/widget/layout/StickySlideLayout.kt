@@ -1,6 +1,7 @@
 package me.sangoh.clone.toss.android.widget.layout
 
 import android.content.Context
+import android.content.res.Resources
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
@@ -13,44 +14,43 @@ class StickySlideLayout @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
-) : FrameLayout(context, attrs, defStyleAttr) {
+) : MotionLayout(context, attrs, defStyleAttr) {
 
-    private val motionBase: MotionLayout
     private val layoutBase: FrameLayout
 
     init {
         val li = getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        motionBase = li.inflate(R.layout.widget_sticky_slide_view, this, false) as MotionLayout
-        layoutBase = motionBase.findViewById(R.id.layout_base)
+        layoutBase = li.inflate(R.layout.widget_sticky_slide_view, this, false) as FrameLayout
+        super.addView(layoutBase)
 
-        context.theme.obtainStyledAttributes(
-            attrs,
-            R.styleable.View,
-            0, 0
-        ).apply {}
+        this.setBackgroundColor(
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+                resources.getColor(R.color.transparent_gray, null)
+            } else {
+                resources.getColor(R.color.transparent_gray)
+            }
+        )
+        this.loadLayoutDescription(R.xml.widget_sticky_slide_view_scene)
 
-        super.addView(motionBase)
+        this.hide()
     }
 
     fun show() {
         this.visibility = View.VISIBLE
-        motionBase.transitionToEnd()
+        this.transitionToEnd()
     }
 
     fun close() {
-        motionBase.transitionToStart()
+        this.transitionToStart()
     }
 
     fun hide() {
         this.visibility = View.GONE
     }
 
-    fun setTransitionListener(listener: MotionLayout.TransitionListener ) {
-        motionBase.setTransitionListener(listener)
-    }
 
     override fun addView(child: View?) {
-        if (motionBase == child) {
+        if (layoutBase == child) {
             super.addView(child)
         } else {
             layoutBase.addView(child)
@@ -58,7 +58,7 @@ class StickySlideLayout @JvmOverloads constructor(
     }
 
     override fun addView(child: View?, index: Int) {
-        if (motionBase == child) {
+        if (layoutBase == child) {
             super.addView(child, index)
         } else {
             layoutBase.addView(child, index)
@@ -66,7 +66,7 @@ class StickySlideLayout @JvmOverloads constructor(
     }
 
     override fun addView(child: View?, width: Int, height: Int) {
-        if (motionBase == child) {
+        if (layoutBase == child) {
             super.addView(child, width, height)
         } else {
             layoutBase.addView(child, width, height)
@@ -74,7 +74,7 @@ class StickySlideLayout @JvmOverloads constructor(
     }
 
     override fun addView(child: View?, params: ViewGroup.LayoutParams?) {
-        if (motionBase == child) {
+        if (layoutBase == child) {
             super.addView(child, params)
         } else {
             layoutBase.addView(child, params)
@@ -82,7 +82,7 @@ class StickySlideLayout @JvmOverloads constructor(
     }
 
     override fun addView(child: View?, index: Int, params: ViewGroup.LayoutParams?) {
-        if (motionBase == child) {
+        if (layoutBase == child) {
             super.addView(child, index, params)
         } else {
             layoutBase.addView(child, index, params)

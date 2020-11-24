@@ -14,7 +14,7 @@
 
     <ConstraintSet android:id="@+id/start">
         <Constraint
-            android:id="@+id/layout_permission_base"
+            android:id="@+id/layout_base"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="parent" />
@@ -24,7 +24,7 @@
 
     <ConstraintSet android:id="@+id/end">
         <Constraint
-            android:id="@id/layout_permission_base"
+            android:id="@id/layout_base"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent" />

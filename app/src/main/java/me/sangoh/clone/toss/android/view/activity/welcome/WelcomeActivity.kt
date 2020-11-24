@@ -110,7 +110,7 @@ class WelcomeActivity : BaseActivity(), MotionLayout.TransitionListener, View.On
         val title: String
         val description: String
 
-        for (i in 0..permissions.size) {
+        for (i in permissions.indices) {
             if (grantResults[i] == PackageManager.PERMISSION_GRANTED) {
                 continue
             }
