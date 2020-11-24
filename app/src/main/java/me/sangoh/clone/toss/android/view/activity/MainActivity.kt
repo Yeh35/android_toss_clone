@@ -1,6 +1,7 @@
 package me.sangoh.clone.toss.android.view.activity
 
 import android.os.Bundle
+import android.view.View
 import com.example.toss.R
 
 class MainActivity : BaseActivity() {
