@@ -27,4 +27,5 @@
     <string name="no">취소</string>
     <string name="please_Input_name">이름을 입력해주세요</string>
     <string name="name">이름</string>
+    <string name="please_input_name">이름을 입력해주세요.</string>
 </resources>

@@ -6,7 +6,7 @@
         <attr name="text" format="string" localization="suggested"/>
     </declare-styleable>
 
-    <declare-styleable name="InputTitleLayout">
+    <declare-styleable name="CustomTitleEditText">
         <attr name="title" format="string" />
         <attr name="defaultErrorMsg" format="string"/>
     </declare-styleable>
