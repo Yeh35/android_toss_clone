@@ -3,8 +3,10 @@ package me.sangoh.clone.toss.android.widget
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
+import android.view.View
 import android.widget.EditText
 import android.widget.FrameLayout
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.core.content.res.getStringOrThrow
 import com.example.toss.R
@@ -18,6 +20,8 @@ class TossTitleEditText(context: Context, attrs: AttributeSet) : FrameLayout(con
     private val tvTitle: TextView
     private val tvErrorMessage: TextView
     private val editText: EditText
+    private val btnPopup: ImageButton
+    private val isPopup: Boolean
 
     init {
         val li = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
@@ -26,18 +30,26 @@ class TossTitleEditText(context: Context, attrs: AttributeSet) : FrameLayout(con
 
         context.theme.obtainStyledAttributes(
             attrs,
-            R.styleable.CustomTitleEditText,
+            R.styleable.TossTitleEditText,
             0, 0
         ).apply {
-            title = getStringOrThrow(R.styleable.CustomTitleEditText_title)
-            defaultErrorMsg = getStringOrThrow(R.styleable.CustomTitleEditText_defaultErrorMsg)
+            title = getStringOrThrow(R.styleable.TossTitleEditText_title)
+            defaultErrorMsg = getStringOrThrow(R.styleable.TossTitleEditText_defaultErrorMsg)
+            isPopup = getBoolean(R.styleable.TossTitleEditText_is_popup, false)
         }
 
         tvTitle = baseView.findViewById(R.id.tv_title)
         tvErrorMessage = baseView.findViewById(R.id.tv_error_message)
         editText = baseView.findViewById(R.id.edit_text)
+        btnPopup = baseView.findViewById(R.id.btn_popup)
 
         tvTitle.text = title
+        btnPopup.visibility = if (isPopup) View.VISIBLE else View.GONE
+    }
+
+    override fun setOnClickListener(l: OnClickListener?) {
+        editText.setOnClickListener(l)
+        btnPopup.setOnClickListener(l)
     }
 
 }

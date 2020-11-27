@@ -1,14 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <attr name="title" format="string" />
+    <attr name="defaultErrorMsg" format="string"/>
+
     <declare-styleable name="BottomBarButton">
         <attr name="src" format="reference" />
         <attr name="src_activate" format="reference"/>
         <attr name="text" format="string" localization="suggested"/>
     </declare-styleable>
 
-    <declare-styleable name="CustomTitleEditText">
-        <attr name="title" format="string" />
-        <attr name="defaultErrorMsg" format="string"/>
+    <declare-styleable name="TossTitleEditText">
+        <attr name="title"/>
+        <attr name="defaultErrorMsg"/>
         <attr name="is_popup" format="boolean"/>
+    </declare-styleable>
+
+    <declare-styleable name="TossTitleSocialSecurityNumberEditText">
+        <attr name="title"/>
+        <attr name="defaultErrorMsg"/>
     </declare-styleable>
 </resources>
