@@ -20,7 +20,6 @@ import android.net.Uri
 import android.provider.Settings
 import android.view.LayoutInflater
 import android.widget.Button
-import android.widget.FrameLayout
 import me.sangoh.clone.toss.android.utils.*
 import me.sangoh.clone.toss.android.view.activity.login.LoginActivity
 
