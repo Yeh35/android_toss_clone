@@ -19,39 +19,57 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/edit_text"
+    <LinearLayout
+        android:id="@+id/layout_edit"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:autofillHints="password"
-        android:background="@color/white"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:paddingTop="8dp"
-        android:textSize="16sp"
+        android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_title" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_title" >
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="3dp"
-        android:background="@color/blue"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit_text" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
+            <EditText
+                android:id="@+id/edit_text"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:autofillHints="password"
+                android:background="@color/white"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:paddingTop="8dp"
+                android:textSize="16sp"/>
+
+            <ImageButton
+                android:id="@+id/btn_popup"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:src="@drawable/ic_baseline_expand_more_24"/>
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/line_for_edit"
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:background="@color/blue"/>
+
+    </LinearLayout>
 
     <TextView
         android:id="@+id/tv_error_message"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
         android:textColor="@color/blue"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/edit_text" />
+        app:layout_constraintTop_toBottomOf="@id/layout_edit" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

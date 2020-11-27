@@ -13,7 +13,7 @@
         android:id="@+id/tv_title"
         android:layout_marginStart="26dp"
         android:layout_marginTop="72dp"
-        android:text="@string/please_Input_name"
+        android:text="@string/please_input_name"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -39,9 +39,26 @@
         <me.sangoh.clone.toss.android.widget.TossTitleEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:title="@string/name"
+            app:title="@string/phone_number"
             app:defaultErrorMsg="@string/please_input_name"/>
 
+        <me.sangoh.clone.toss.android.widget.TossTitleEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:title="@string/news_agency"
+            app:defaultErrorMsg="@string/please_input_social_security_number"/>
+
+        <me.sangoh.clone.toss.android.widget.TossTitleSocialSecurityNumberEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:title="@string/social_security_number"
+            app:defaultErrorMsg="@string/please_input_social_security_number"/>
+
+        <me.sangoh.clone.toss.android.widget.TossTitleEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:title="@string/name"
+            app:defaultErrorMsg="@string/please_input_name"/>
 
     </LinearLayout>
 

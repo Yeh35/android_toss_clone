@@ -4,8 +4,7 @@
     <string name="consumption">내 소비</string>
     <string name="all">전체</string>
     <string name="recommendation">추천</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
     <string name="welcome_title">금융의 모든 것\n토스에서 간편하게</string>
     <string name="welcome_toss_is_safe">토스는 안전합니다.</string>
     <string name="welcome_boast">다운로드 %s, 누적 보안 사고 %s</string>
@@ -25,7 +24,20 @@
     <string name="please_allow_access_storage">간편 송금을 위해서 \'저장공간\'접근 권한이 필요합니다.</string>
     <string name="ok">확인</string>
     <string name="no">취소</string>
-    <string name="please_Input_name">이름을 입력해주세요</string>
+
     <string name="name">이름</string>
     <string name="please_input_name">이름을 입력해주세요.</string>
+    <string name="phone_number">휴대폰번호</string>
+    <string name="please_input_phone_number">휴대폰번호을 입력해주세요</string>
+    <string name="social_security_number">주민등록번호</string>
+    <string name="please_input_social_security_number">주민등록번호를 입력해주세요</string>
+    <string name="news_agency">통신사</string>
+    <string name="please_input_news_agency">통신사를 입력해주세요</string>
+
+    <!--특수문자-->
+    <string name="hyphen">—</string>
+    <string name="circle">●</string>
+
+
+
 </resources>

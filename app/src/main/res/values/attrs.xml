@@ -9,5 +9,6 @@
     <declare-styleable name="CustomTitleEditText">
         <attr name="title" format="string" />
         <attr name="defaultErrorMsg" format="string"/>
+        <attr name="is_popup" format="boolean"/>
     </declare-styleable>
 </resources>
