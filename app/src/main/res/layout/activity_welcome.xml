@@ -7,13 +7,13 @@
     <data>
         <variable
             name="viewModel"
-            type="me.sangoh.clone.toss.android.view.activity.welcome.WelcomeViewModel" />
+            type="me.sangoh.clone.toss.android.viewmodel.WelcomeViewModel" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="me.sangoh.clone.toss.android.view.activity.welcome.WelcomeActivity">
+        tools:context="me.sangoh.clone.toss.android.view.activity.WelcomeActivity">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout"

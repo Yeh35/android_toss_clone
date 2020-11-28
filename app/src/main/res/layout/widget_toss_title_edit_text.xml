@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
     android:paddingStart="6dp"
     android:paddingEnd="6dp">
 
@@ -13,7 +14,7 @@
         android:layout_height="wrap_content"
         android:labelFor="@id/edit_text"
         android:text="@string/name"
-        android:textColor="@color/blue"
+        android:textColor="@color/gray"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -26,7 +27,7 @@
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_title" >
+        app:layout_constraintTop_toBottomOf="@+id/tv_title">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -42,14 +43,14 @@
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:paddingTop="8dp"
-                android:textSize="16sp"/>
+                android:textSize="16sp" />
 
             <ImageButton
                 android:id="@+id/btn_popup"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:background="@color/white"
-                android:src="@drawable/ic_baseline_expand_more_24"/>
+                android:src="@drawable/ic_baseline_expand_more_24" />
 
         </LinearLayout>
 
@@ -57,7 +58,7 @@
             android:id="@+id/line_for_edit"
             android:layout_width="match_parent"
             android:layout_height="3dp"
-            android:background="@color/blue"/>
+            android:background="@color/gray" />
 
     </LinearLayout>
 
@@ -65,7 +66,7 @@
         android:id="@+id/tv_error_message"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/blue"
+        android:textColor="@color/gray"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

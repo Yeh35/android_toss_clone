@@ -1,67 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<layout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/layout_base"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/white"
-    tools:context="me.sangoh.clone.toss.android.view.activity.login.LoginActivity">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView
-        style="@style/MainTextView"
-        android:id="@+id/tv_title"
-        android:layout_marginStart="26dp"
-        android:layout_marginTop="72dp"
-        android:text="@string/please_input_name"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <data>
+        <variable
+            name="viewModel"
+            type="me.sangoh.clone.toss.android.viewmodel.LoginViewModel" />
+    </data>
 
-    <Button
-        style="@style/BlueButton"
-        android:id="@+id/btn_ok"
-        android:text="@string/ok"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_base"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="16dp"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_title">
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        tools:context="me.sangoh.clone.toss.android.view.activity.LoginActivity">
 
-        <me.sangoh.clone.toss.android.widget.TossTitleEditText
+        <TextView
+            style="@style/MainTextView"
+            android:id="@+id/tv_title"
+            android:layout_marginStart="26dp"
+            android:layout_marginTop="72dp"
+            android:text="@string/please_input_name"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            style="@style/BlueButton"
+            android:id="@+id/btn_ok"
+            android:text="@string/ok"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:title="@string/phone_number"
-            app:defaultErrorMsg="@string/please_input_name"/>
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="16dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_title">
 
-        <me.sangoh.clone.toss.android.widget.TossTitleEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:title="@string/news_agency"
-            app:defaultErrorMsg="@string/please_input_social_security_number"/>
+            <me.sangoh.clone.toss.android.widget.TossTitleEditText
+                android:id="@+id/edit_pone_number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:title="@string/phone_number"
+                app:defaultErrorMsg="@string/please_input_name"/>
 
-        <me.sangoh.clone.toss.android.widget.TossTitleSocialSecurityNumberEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:title="@string/social_security_number"
-            app:defaultErrorMsg="@string/please_input_social_security_number"/>
+            <me.sangoh.clone.toss.android.widget.TossTitleEditText
+                android:id="@+id/edit_news_agency"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:title="@string/news_agency"
+                app:defaultErrorMsg="@string/please_input_social_security_number"/>
 
-        <me.sangoh.clone.toss.android.widget.TossTitleEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:title="@string/name"
-            app:defaultErrorMsg="@string/please_input_name"/>
+            <me.sangoh.clone.toss.android.widget.TossTitleSocialSecurityNumberEditText
+                android:id="@+id/edit_social_security_number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:title="@string/social_security_number"
+                app:defaultErrorMsg="@string/please_input_social_security_number"/>
 
-    </LinearLayout>
+            <me.sangoh.clone.toss.android.widget.TossTitleEditText
+                android:id="@+id/edit_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:title="@string/name"
+                app:defaultErrorMsg="@string/please_input_name"/>
+
+        </LinearLayout>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
+

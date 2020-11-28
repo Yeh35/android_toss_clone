@@ -22,8 +22,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Andorid_toss_clone">
 
-        <activity android:name="me.sangoh.clone.toss.android.view.activity.login.LoginActivity"/>
-        <activity android:name="me.sangoh.clone.toss.android.view.activity.welcome.WelcomeActivity" />
+        <activity android:name="me.sangoh.clone.toss.android.view.activity.LoginActivity"/>
+        <activity android:name="me.sangoh.clone.toss.android.view.activity.WelcomeActivity" />
         <activity android:name="me.sangoh.clone.toss.android.view.activity.IntroActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

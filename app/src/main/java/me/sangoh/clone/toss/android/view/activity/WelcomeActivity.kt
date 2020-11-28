@@ -1,4 +1,4 @@
-package me.sangoh.clone.toss.android.view.activity.welcome
+package me.sangoh.clone.toss.android.view.activity
 
 import android.content.DialogInterface
 import android.content.pm.PackageManager
@@ -6,12 +6,10 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.constraintlayout.motion.widget.MotionLayout
-import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.example.toss.R
 import com.example.toss.databinding.ActivityWelcomeBinding
 import kotlinx.coroutines.launch
-import me.sangoh.clone.toss.android.view.activity.BaseActivity
 import me.sangoh.clone.toss.android.view.dialog.CustomAlarmDialog
 import android.Manifest
 import android.content.Context
@@ -21,37 +19,36 @@ import android.provider.Settings
 import android.view.LayoutInflater
 import android.widget.Button
 import me.sangoh.clone.toss.android.utils.*
-import me.sangoh.clone.toss.android.view.activity.login.LoginActivity
+import me.sangoh.clone.toss.android.viewmodel.WelcomeViewModel
+import me.sangoh.clone.toss.android.widget.layout.StickySlideLayout
 
-class WelcomeActivity : BaseActivity(), MotionLayout.TransitionListener, View.OnClickListener {
-
+class WelcomeActivity : BaseActivity<ActivityWelcomeBinding>(R.layout.activity_welcome),
+    MotionLayout.TransitionListener, View.OnClickListener {
     private val RESULT_CODE_SETTING = 20105
 
-    private lateinit var binding: ActivityWelcomeBinding
     private var permissionDeniedCount = 0
 
     private lateinit var btnContinue: Button
+    private lateinit var motionBase: StickySlideLayout
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_welcome)
 
-        binding = DataBindingUtil.setContentView(
-            this,
-            R.layout.activity_welcome
+        binding.viewModel = ViewModelProvider(this).get(
+            WelcomeViewModel::class.java
         )
 
-        val viewModel: WelcomeViewModel = ViewModelProvider(this).get(WelcomeViewModel::class.java)
-        binding.viewModel = viewModel
-
-        binding.motionBase.visibility = View.GONE
-        binding.motionBase.setTransitionListener(this)
+        motionBase = binding.motionBase
 
         val li = this.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val layoutPermission = li.inflate(R.layout.layout_permission, binding.motionBase, false)
-        binding.motionBase.addView(layoutPermission)
+        motionBase.addView(layoutPermission)
 
         btnContinue = layoutPermission.findViewById(R.id.btn_continue)
+
+        motionBase.visibility = View.GONE
+        motionBase.setTransitionListener(this)
 
         binding.btnStart.setOnClickListener(this)
         btnContinue.setOnClickListener(this)

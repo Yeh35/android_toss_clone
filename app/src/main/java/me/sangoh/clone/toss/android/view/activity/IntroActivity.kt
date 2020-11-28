@@ -2,10 +2,10 @@ package me.sangoh.clone.toss.android.view.activity
 
 import android.content.Intent
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.example.toss.R
-import me.sangoh.clone.toss.android.view.activity.welcome.WelcomeActivity
 
-class IntroActivity : BaseActivity() {
+class IntroActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
