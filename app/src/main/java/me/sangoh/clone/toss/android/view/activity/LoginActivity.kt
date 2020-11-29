@@ -1,18 +1,20 @@
 package me.sangoh.clone.toss.android.view.activity
 
-import com.example.toss.R
 import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
 import android.widget.Button
+import android.widget.FrameLayout
+import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
+import com.example.toss.R
 import com.example.toss.databinding.ActivityLoginBinding
 import me.sangoh.clone.toss.android.utils.listener.ITextChangedListener
 import me.sangoh.clone.toss.android.viewmodel.LoginViewModel
+import me.sangoh.clone.toss.android.widget.TextArrayStickySlide
 import me.sangoh.clone.toss.android.widget.TossEditText
 import me.sangoh.clone.toss.android.widget.TossTitleEditText
 import me.sangoh.clone.toss.android.widget.TossTitleSocialSecurityNumberEditText
-import me.sangoh.clone.toss.android.widget.layout.StickySlideLayout
 
 
 class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login),
@@ -25,9 +27,9 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
     private lateinit var editNewsAgency: TossTitleEditText
     private lateinit var editPoneNumber: TossTitleEditText
     private lateinit var btnOk: Button
-    private lateinit var slideLayout: StickySlideLayout
+//    private lateinit var slideLayout: StickySlideLayout
 
-//    private lateinit var newsAgency:
+    private lateinit var textArraySlideSlide: TextArrayStickySlide
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,7 +44,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
         editNewsAgency = binding.editNewsAgency
         editPoneNumber = binding.editPoneNumber
         btnOk = binding.btnOk
-        slideLayout = binding.motionBase
+//        slideLayout = binding.motionBase
 
         editSocialSecurityNumber.visibility = View.GONE
         editNewsAgency.visibility = View.GONE

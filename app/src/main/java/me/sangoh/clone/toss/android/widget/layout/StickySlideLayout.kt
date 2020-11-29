@@ -10,13 +10,13 @@ import android.widget.FrameLayout
 import androidx.constraintlayout.motion.widget.MotionLayout
 import com.example.toss.R
 
-class StickySlideLayout @JvmOverloads constructor(
+open class StickySlideLayout @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
 ) : MotionLayout(context, attrs, defStyleAttr) {
 
-    private val layoutBase: FrameLayout
+    protected val layoutBase: FrameLayout
 
     init {
         val li = getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
