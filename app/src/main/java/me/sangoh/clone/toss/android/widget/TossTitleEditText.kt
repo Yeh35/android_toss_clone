@@ -1,10 +1,10 @@
 package me.sangoh.clone.toss.android.widget
 
 import android.content.Context
+import android.graphics.Rect
 import android.util.AttributeSet
 import android.view.KeyEvent
 import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.view.View
 import android.widget.EditText
 import android.widget.ImageButton
@@ -15,7 +15,7 @@ import com.example.toss.R
 import me.sangoh.clone.toss.android.utils.listener.ITextChangedListener
 
 class TossTitleEditText(context: Context, attrs: AttributeSet) : TossEditText(context, attrs),
-    View.OnFocusChangeListener, View.OnKeyListener {
+    View.OnFocusChangeListener, View.OnKeyListener, View.OnClickListener {
 
     //properties
     val title: String
@@ -31,6 +31,8 @@ class TossTitleEditText(context: Context, attrs: AttributeSet) : TossEditText(co
 
     private var validator: IValueValidator? = null
     private var textChangedListener: ITextChangedListener<TossEditText>? = null
+
+    var clickListener: OnClickListener? = null
 
     init {
         val li = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
@@ -55,8 +57,15 @@ class TossTitleEditText(context: Context, attrs: AttributeSet) : TossEditText(co
         lineForEdit = baseView.findViewById(R.id.line_for_edit)
 
         tvTitle.text = title
-        btnPopup.visibility = if (isPopup) View.VISIBLE else View.GONE
-        editText.inputType = inputType
+        if (isPopup) {
+            btnPopup.visibility = View.VISIBLE
+            editText.inputType = 0
+            btnPopup.setOnClickListener(this)
+            editText.setOnClickListener(this)
+        } else {
+            btnPopup.visibility = View.GONE
+            editText.inputType = inputType
+        }
 
         editText.onFocusChangeListener = this
         editText.setOnKeyListener(this)
@@ -110,6 +119,19 @@ class TossTitleEditText(context: Context, attrs: AttributeSet) : TossEditText(co
             return false
         }
         return true
+    }
+
+    override fun requestFocus(direction: Int, previouslyFocusedRect: Rect?): Boolean {
+        return if (isPopup) {
+            clickListener?.onClick(this)
+            return clickListener != null
+        } else {
+            super.requestFocus(direction, previouslyFocusedRect)
+        }
+    }
+
+    override fun onClick(v: View?) {
+        clickListener?.onClick(this)
     }
 
 }

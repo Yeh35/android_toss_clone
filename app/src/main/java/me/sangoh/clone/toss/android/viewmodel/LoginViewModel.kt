@@ -3,6 +3,7 @@ package me.sangoh.clone.toss.android.viewmodel
 import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import me.sangoh.clone.toss.android.model.type.NewsAgency
 import me.sangoh.clone.toss.android.model.type.PhoneNumber
 import me.sangoh.clone.toss.android.view.BaseViewModel
 
@@ -23,5 +24,7 @@ class LoginViewModel(application: Application) : BaseViewModel(application) {
     private val _phoneNumber = MutableLiveData<PhoneNumber>()
     val phoneNumber: LiveData<PhoneNumber>
         get() = _phoneNumber
+
+    private val newsAgencyList: Array<NewsAgency> = NewsAgency.values()
 
 }

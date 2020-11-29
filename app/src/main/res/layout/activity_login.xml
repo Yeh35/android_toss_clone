@@ -85,8 +85,13 @@
 
         </LinearLayout>
 
-
+        <me.sangoh.clone.toss.android.widget.layout.StickySlideLayout
+            android:id="@+id/motion_base"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layoutDescription="@xml/widget_sticky_slide_view_scene"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 </layout>
 

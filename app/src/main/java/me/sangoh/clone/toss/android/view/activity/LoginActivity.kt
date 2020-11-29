@@ -2,8 +2,6 @@ package me.sangoh.clone.toss.android.view.activity
 
 import com.example.toss.R
 import android.os.Bundle
-import android.text.Editable
-import android.util.Log
 import android.view.View
 import android.view.WindowManager
 import android.widget.Button
@@ -14,6 +12,7 @@ import me.sangoh.clone.toss.android.viewmodel.LoginViewModel
 import me.sangoh.clone.toss.android.widget.TossEditText
 import me.sangoh.clone.toss.android.widget.TossTitleEditText
 import me.sangoh.clone.toss.android.widget.TossTitleSocialSecurityNumberEditText
+import me.sangoh.clone.toss.android.widget.layout.StickySlideLayout
 
 
 class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login),
@@ -26,6 +25,9 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
     private lateinit var editNewsAgency: TossTitleEditText
     private lateinit var editPoneNumber: TossTitleEditText
     private lateinit var btnOk: Button
+    private lateinit var slideLayout: StickySlideLayout
+
+//    private lateinit var newsAgency:
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,17 +36,20 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
         viewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
         binding.viewModel = viewModel
 
+        //buding
         editName = binding.editName
         editSocialSecurityNumber = binding.editSocialSecurityNumber
         editNewsAgency = binding.editNewsAgency
         editPoneNumber = binding.editPoneNumber
         btnOk = binding.btnOk
+        slideLayout = binding.motionBase
 
         editSocialSecurityNumber.visibility = View.GONE
         editNewsAgency.visibility = View.GONE
         editPoneNumber.visibility = View.GONE
 
         btnOk.setOnClickListener(this)
+        editNewsAgency.clickListener = this
 
         editName.setOnTextChangedListener(this)
         editSocialSecurityNumber.setOnTextChangedListener(this)
@@ -56,6 +61,9 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
     override fun onClick(v: View?) {
         when(v) {
             btnOk -> {
+
+            }
+            editNewsAgency -> {
 
             }
             else -> {
@@ -70,8 +78,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
                 if (editSocialSecurityNumber.visibility == View.GONE && target.validation()) {
                     editSocialSecurityNumber.visibility = View.VISIBLE
                 }
-                val isFocuse =  editSocialSecurityNumber.requestFocus()
-                Log.d("isFocuse", isFocuse.toString())
+                editSocialSecurityNumber.requestFocus()
             }
             editSocialSecurityNumber -> {
                 if (editNewsAgency.visibility == View.GONE && target.validation()) {
@@ -89,6 +96,11 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
                 error("잘못된 호출입니다.")
             }
         }
+    }
+
+    private fun newsAgencyView(): View {
+
+        return View(this)
     }
 
 }

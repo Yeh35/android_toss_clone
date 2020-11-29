@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/white"
+    android:nextFocusDown="@id/edit_text"
     android:paddingStart="6dp"
     android:paddingEnd="6dp">
 
@@ -34,17 +35,14 @@
             android:layout_height="wrap_content">
 
             <EditText
+                style="@style/TossEditText"
                 android:id="@+id/edit_text"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:autofillHints="password"
-                android:background="@color/white"
                 android:ems="10"
-                android:inputType="textPersonName"
+                android:inputType="text"
                 android:paddingTop="8dp"
                 android:singleLine="true"
-                android:textSize="16sp" />
+                android:autofillHints="@string/name" />
 
             <ImageButton
                 android:id="@+id/btn_popup"

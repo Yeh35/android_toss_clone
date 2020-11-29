@@ -2,6 +2,7 @@ package me.sangoh.clone.toss.android.widget
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.graphics.Rect
 import android.text.Editable
 import android.text.InputFilter
 import android.text.TextWatcher
@@ -36,8 +37,9 @@ class TossTitleSocialSecurityNumberEditText(context: Context, attrs: AttributeSe
     private val lineSecondOne: View
 
     private val validator: IValueValidator
-
     private var textChangedListener: ITextChangedListener<TossEditText>? = null
+
+    private var isFirst = true
 
     init {
         val li = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
@@ -72,6 +74,7 @@ class TossTitleSocialSecurityNumberEditText(context: Context, attrs: AttributeSe
         editSecondOne.setOnKeyListener(this)
         editFirst.onFocusChangeListener = this
         editSecondOne.onFocusChangeListener = this
+        this.onFocusChangeListener = this
 
         validator = object : IValueValidator {
             /**
@@ -111,10 +114,9 @@ class TossTitleSocialSecurityNumberEditText(context: Context, attrs: AttributeSe
     }
 
     override fun onFocusChange(v: View?, hasFocus: Boolean) {
-        when(v) {
+        when (v) {
             editFirst,
             editSecondOne -> {
-//                setColor(if (hasFocus) R.color.blue else R.color.gray)
                 this.updateState()
             }
             else -> {
@@ -128,16 +130,13 @@ class TossTitleSocialSecurityNumberEditText(context: Context, attrs: AttributeSe
         if ((event!!.action == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
             //Enter key push process
 
-            when(v) {
+            when (v) {
                 editFirst -> {
-                    if (editFirst.text.length < 6) {
-                        editFirst.requestFocus()
-                    } else {
+                    if (editFirst.text.length == 6) {
                         editSecondOne.requestFocus()
                     }
                 }
                 editSecondOne -> {
-                    updateState()
                     textChangedListener?.onTextChanged(this@TossTitleSocialSecurityNumberEditText)
                 }
 
@@ -152,9 +151,10 @@ class TossTitleSocialSecurityNumberEditText(context: Context, attrs: AttributeSe
     }
 
     private fun updateState() {
-        if (validation()) {
+        if (isFirst || validation()) {
+            isFirst = false
             tvErrorMessage.text = ""
-            if (isFocusable) {
+            if (editFirst.isFocused || editSecondOne.isFocused) {
                 setColor(R.color.blue)
             } else {
                 setColor(R.color.gray)
@@ -181,5 +181,9 @@ class TossTitleSocialSecurityNumberEditText(context: Context, attrs: AttributeSe
 
     override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
     override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+
+    override fun requestFocus(direction: Int, previouslyFocusedRect: Rect?): Boolean {
+        return editFirst.requestFocus()
+    }
 
 }

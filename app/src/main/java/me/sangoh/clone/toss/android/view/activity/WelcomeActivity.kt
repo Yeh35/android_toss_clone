@@ -29,7 +29,7 @@ class WelcomeActivity : BaseActivity<ActivityWelcomeBinding>(R.layout.activity_w
     private var permissionDeniedCount = 0
 
     private lateinit var btnContinue: Button
-    private lateinit var motionBase: StickySlideLayout
+    private lateinit var slideLayout: StickySlideLayout
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,16 +39,16 @@ class WelcomeActivity : BaseActivity<ActivityWelcomeBinding>(R.layout.activity_w
             WelcomeViewModel::class.java
         )
 
-        motionBase = binding.motionBase
+        slideLayout = binding.motionBase
 
         val li = this.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val layoutPermission = li.inflate(R.layout.layout_permission, binding.motionBase, false)
-        motionBase.addView(layoutPermission)
+        slideLayout.addView(layoutPermission)
 
         btnContinue = layoutPermission.findViewById(R.id.btn_continue)
 
-        motionBase.visibility = View.GONE
-        motionBase.setTransitionListener(this)
+        slideLayout.visibility = View.GONE
+        slideLayout.setTransitionListener(this)
 
         binding.btnStart.setOnClickListener(this)
         btnContinue.setOnClickListener(this)

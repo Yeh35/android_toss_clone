@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:nextFocusDown="@id/edit_first"
     android:paddingStart="6dp"
     android:paddingEnd="6dp">
 
@@ -23,11 +24,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:visibility="visible"
-        tools:layout_editor_absoluteX="6dp"
         android:nextFocusDown="@id/edit_second_one"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_title">
+
+<!--        android:focusable="true"-->
+<!--        ="true"-->
 
         <LinearLayout
             android:layout_width="0dp"
@@ -36,20 +39,12 @@
             android:orientation="vertical">
 
             <EditText
+                style="@style/TossEditText"
                 android:id="@+id/edit_first"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:autofillHints="password"
-                android:background="@color/white"
-                android:ems="6"
                 android:inputType="number"
-                android:maxLength="6"
-                android:paddingTop="8dp"
-                android:textSize="16sp"
-                android:singleLine="true"
-                android:nextFocusForward="@id/edit_second_one"
-                android:nextFocusDown="@id/edit_second_one"
-                tools:ignore="LabelFor" />
+                android:importantForAutofill="no"
+                android:nextFocusDown="@id/edit_first"
+                tools:ignore="LabelFor"/>
 
             <View
                 android:id="@+id/bottom_line_first"
@@ -71,7 +66,6 @@
             android:layout_marginStart="6dp"
             android:layout_marginEnd="6dp"/>
 
-
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -87,19 +81,14 @@
                 tools:ignore="NestedWeights">
 
                 <EditText
+                    style="@style/TossEditText"
                     android:id="@+id/edit_second_one"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:autofillHints="password"
-                    android:background="@color/white"
-                    android:ems="1"
                     android:gravity="center"
                     android:inputType="number"
                     android:maxLength="6"
-                    android:paddingTop="8dp"
-                    android:textSize="16sp"
-                    android:singleLine="true"
-                    tools:ignore="LabelFor" />
+                    android:importantForAutofill="no"
+                    android:nextFocusDown="@id/edit_second_one"
+                    tools:ignore="LabelFor"/>
 
                 <View
                     android:id="@+id/bottom_line_second_one"
@@ -108,7 +97,7 @@
                     android:background="@color/blue"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/edit_layout" />
+                    app:layout_constraintTop_toBottomOf="@+id/edit_layout"/>
             </LinearLayout>
 
             <TextView
