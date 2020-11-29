@@ -6,7 +6,7 @@ import android.text.TextWatcher
 
 abstract class TextChangedListener<T>(
     private val target: T
-) : TextWatcher {
+) : TextWatcher, ITextChangedListener<T> {
     override fun beforeTextChanged(
         s: CharSequence,
         start: Int,
@@ -24,9 +24,6 @@ abstract class TextChangedListener<T>(
     }
 
     override fun afterTextChanged(s: Editable) {
-        this.onTextChanged(target, s)
+        this. onTextChanged(target)
     }
-
-    abstract fun onTextChanged(target: T, s: Editable?)
-
 }

@@ -43,12 +43,15 @@
             android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_title">
+            app:layout_constraintTop_toBottomOf="@+id/tv_title"
+            android:focusable="true">
 
             <me.sangoh.clone.toss.android.widget.TossTitleEditText
                 android:id="@+id/edit_pone_number"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:nextFocusForward="@id/btn_ok"
+                android:inputType="phone"
                 app:title="@string/phone_number"
                 app:defaultErrorMsg="@string/please_input_name"/>
 
@@ -56,6 +59,9 @@
                 android:id="@+id/edit_news_agency"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:nextFocusForward="@id/edit_pone_number"
+                android:nextFocusDown="@id/edit_pone_number"
+                app:is_popup="true"
                 app:title="@string/news_agency"
                 app:defaultErrorMsg="@string/please_input_social_security_number"/>
 
@@ -63,6 +69,8 @@
                 android:id="@+id/edit_social_security_number"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:nextFocusForward="@id/edit_news_agency"
+                android:nextFocusDown="@id/edit_news_agency"
                 app:title="@string/social_security_number"
                 app:defaultErrorMsg="@string/please_input_social_security_number"/>
 
@@ -70,6 +78,8 @@
                 android:id="@+id/edit_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:nextFocusForward="@id/edit_social_security_number"
+                android:nextFocusDown="@id/edit_social_security_number"
                 app:title="@string/name"
                 app:defaultErrorMsg="@string/please_input_name"/>
 

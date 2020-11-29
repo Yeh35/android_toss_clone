@@ -1,23 +1,21 @@
 package me.sangoh.clone.toss.android.widget
 
 import android.content.Context
-import android.os.Build
-import android.text.Editable
-import android.text.InputFilter
-import android.text.TextWatcher
 import android.util.AttributeSet
+import android.view.KeyEvent
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.widget.EditText
-import android.widget.FrameLayout
 import android.widget.ImageButton
 import android.widget.TextView
+import androidx.annotation.ColorRes
 import androidx.core.content.res.getStringOrThrow
 import com.example.toss.R
-import me.sangoh.clone.toss.android.utils.listener.TextChangedListener
+import me.sangoh.clone.toss.android.utils.listener.ITextChangedListener
 
-class TossTitleEditText(context: Context, attrs: AttributeSet) : FrameLayout(context, attrs),
-    View.OnFocusChangeListener {
+class TossTitleEditText(context: Context, attrs: AttributeSet) : TossEditText(context, attrs),
+    View.OnFocusChangeListener, View.OnKeyListener {
 
     //properties
     val title: String
@@ -32,6 +30,7 @@ class TossTitleEditText(context: Context, attrs: AttributeSet) : FrameLayout(con
     private val lineForEdit: View
 
     private var validator: IValueValidator? = null
+    private var textChangedListener: ITextChangedListener<TossEditText>? = null
 
     init {
         val li = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
@@ -46,7 +45,7 @@ class TossTitleEditText(context: Context, attrs: AttributeSet) : FrameLayout(con
             title = getStringOrThrow(R.styleable.TossTitleEditText_title)
             defaultErrorMsg = getStringOrThrow(R.styleable.TossTitleEditText_defaultErrorMsg)
             isPopup = getBoolean(R.styleable.TossTitleEditText_is_popup, false)
-            inputType = getInt(R.styleable.TossTitleEditText_android_inputType, 0)
+            inputType = getInt(R.styleable.TossTitleEditText_android_inputType, 1)
         }
 
         tvTitle = baseView.findViewById(R.id.tv_title)
@@ -59,22 +58,8 @@ class TossTitleEditText(context: Context, attrs: AttributeSet) : FrameLayout(con
         btnPopup.visibility = if (isPopup) View.VISIBLE else View.GONE
         editText.inputType = inputType
 
-        editText.filters = arrayOf(InputFilter.LengthFilter(3))
-
         editText.onFocusChangeListener = this
-        editText.addTextChangedListener(object : TextChangedListener<EditText>(editText) {
-            override fun onTextChanged(target: EditText, s: Editable?) {
-                if (validator != null) {
-                    if (validator!!.validation(target.text.toString())) {
-                        tvErrorMessage.text = ""
-                        setColor(R.color.blue)
-                    } else {
-                        tvErrorMessage.text = defaultErrorMsg
-                        setColor(R.color.rad)
-                    }
-                }
-            }
-        })
+        editText.setOnKeyListener(this)
     }
 
     override fun setOnClickListener(listener: OnClickListener?) {
@@ -87,7 +72,7 @@ class TossTitleEditText(context: Context, attrs: AttributeSet) : FrameLayout(con
         this.setColor(colorId)
     }
 
-    fun validation(): Boolean {
+    override fun validation(): Boolean {
         return if (validator != null) {
             validator!!.validation(editText.text.toString())
         } else {
@@ -95,15 +80,36 @@ class TossTitleEditText(context: Context, attrs: AttributeSet) : FrameLayout(con
         }
     }
 
-    private fun setColor(colorId: Int) {
-        val settingColor = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            resources.getColor(colorId, null)
-        } else {
-            @Suppress("DEPRECATION")
-            resources.getColor(colorId)
-        }
+    override fun setOnTextChangedListener(textChangedListener: ITextChangedListener<TossEditText>) {
+        this.textChangedListener = textChangedListener
+    }
+
+    private fun setColor(@ColorRes colorId: Int) {
+        val settingColor = resource.getColor(colorId)
 
         tvTitle.setTextColor(settingColor)
         lineForEdit.setBackgroundColor(settingColor)
     }
+
+    override fun onKey(v: View?, keyCode: Int, event: KeyEvent?): Boolean {
+        //Enter key Action
+        if ((event!!.action == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
+            //Enter key push process
+            if (validator != null) {
+                if (validator!!.validation(editText.text.toString())) {
+                    tvErrorMessage.text = ""
+                    setColor(R.color.blue)
+                } else {
+                    tvErrorMessage.text = defaultErrorMsg
+                    setColor(R.color.rad)
+                }
+            }
+
+            textChangedListener?.onTextChanged(this@TossTitleEditText)
+//            return true
+            return false
+        }
+        return true
+    }
+
 }

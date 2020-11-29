@@ -167,8 +167,9 @@ class WelcomeActivity : BaseActivity<ActivityWelcomeBinding>(R.layout.activity_w
         }
 
         //전부 pass 한경우
-        nextStep()
-
+        if (requestPermissions()) {
+            nextStep()
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
