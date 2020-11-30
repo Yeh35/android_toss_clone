@@ -25,21 +25,29 @@ class TestActivity : AppCompatActivity(), View.OnClickListener {
         val btnHide: Button = findViewById(R.id.btn_hide)
         btnHide.setOnClickListener(this)
 
-        slideLayout = BaseStickySlide.setContext(this)
 //        slideLayout = findViewById(R.id.motin)
 
-        val textViewLayoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 100)
+        val slideLayoutParams = ViewGroup.LayoutParams(
+            ViewGroup.LayoutParams.MATCH_PARENT,
+            ViewGroup.LayoutParams.MATCH_PARENT
+        )
+        slideLayout = BaseStickySlide(this)
+        baseLayout.addView(slideLayout, slideLayoutParams)
+
+        val textViewLayoutParams = ViewGroup.LayoutParams(
+            ViewGroup.LayoutParams.MATCH_PARENT,
+            ViewGroup.LayoutParams.WRAP_CONTENT
+        )
         val textview = TextView(this)
 
-        textview.text = "아아아앙아아앙아아아앙아아앙아아아앙아아앙아아아앙아아앙아아아앙아아앙아아아앙아아앙아아아앙아아앙"
+        textview.text =
+            "아아아앙아아앙아아아앙아아앙아아아앙아아앙아아아앙아아앙아아아앙아아앙아아아앙아아앙아아아앙아아앙아아아앙아아앙아아아앙아아앙아아아앙아아앙아아아앙아아앙아아아앙아"
         slideLayout.addView(textview, textViewLayoutParams)
-
-        val slideLayoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
-        baseLayout.addView(slideLayout, slideLayoutParams)
+//        baseLayout.addView(textview, slideLayoutParams)
     }
 
     override fun onClick(view: View?) {
-        when(view!!.id) {
+        when (view!!.id) {
             R.id.btn_show -> {
                 slideLayout.show()
             }

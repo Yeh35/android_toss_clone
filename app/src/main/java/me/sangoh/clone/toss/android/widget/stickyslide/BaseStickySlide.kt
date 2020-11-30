@@ -2,6 +2,8 @@ package me.sangoh.clone.toss.android.widget.stickyslide
 
 import android.content.Context
 import android.util.AttributeSet
+import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
@@ -11,56 +13,31 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import me.sangeoh.clone.toss.android.R
 
-class BaseStickySlide constructor(
+class BaseStickySlide @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
-) : MotionLayout(context, attrs, defStyleAttr) {
+) : FrameLayout(context, attrs, defStyleAttr) {
 
+    private val motionLayout: MotionLayout
     private val layoutBase: FrameLayout
 
-    companion object {
-        fun setContext(context: Context): BaseStickySlide {
-            val slide = BaseStickySlide(context)
-            slide.loadLayoutDescription(R.xml.widget_sticky_slide_view_scene)
-            return slide
-        }
-    }
-
     init {
-        val layoutParams = ConstraintLayout.LayoutParams(
-            ViewGroup.LayoutParams.MATCH_PARENT,
-            ViewGroup.LayoutParams.WRAP_CONTENT
-        )
-        layoutParams.bottomToTop = ConstraintLayout.LayoutParams.PARENT_ID
-        layoutParams.startToStart = ConstraintLayout.LayoutParams.PARENT_ID
-        layoutParams.endToEnd = ConstraintLayout.LayoutParams.PARENT_ID
+        val li = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+        motionLayout = li.inflate(R.layout.custom_view_sticky_slide, this, false) as MotionLayout
+        this.addView(motionLayout)
 
-        layoutBase = FrameLayout(context)
-        layoutBase.background = ContextCompat.getDrawable(context, R.drawable.rounded_white_layout)
-        layoutBase.id = R.id.layout_base
-
-        this.addView(layoutBase, layoutParams)
-
-        this.setBackgroundColor(
-            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
-                resources.getColor(R.color.transparent_gray, null)
-            } else {
-                @Suppress("DEPRECATION")
-                resources.getColor(R.color.transparent_gray)
-            }
-        )
-        this.loadLayoutDescription(R.xml.widget_sticky_slide_view_scene)
-        this.hide()
+        layoutBase = motionLayout.findViewById(R.id.layout_base)
+        println(layoutBase.id)
     }
 
     fun show() {
         this.visibility = View.VISIBLE
-        this.transitionToEnd()
+        motionLayout.transitionToEnd()
     }
 
     fun close() {
-        this.transitionToStart()
+        motionLayout.transitionToStart()
     }
 
     fun hide() {
@@ -68,7 +45,7 @@ class BaseStickySlide constructor(
     }
 
     override fun addView(child: View?) {
-        if (layoutBase == child) {
+        if (motionLayout == child) {
             super.addView(child)
         } else {
             layoutBase.addView(child)
@@ -76,7 +53,7 @@ class BaseStickySlide constructor(
     }
 
     override fun addView(child: View?, index: Int) {
-        if (layoutBase == child) {
+        if (motionLayout == child) {
             super.addView(child, index)
         } else {
             layoutBase.addView(child, index)
@@ -84,7 +61,7 @@ class BaseStickySlide constructor(
     }
 
     override fun addView(child: View?, width: Int, height: Int) {
-        if (layoutBase == child) {
+        if (motionLayout == child) {
             super.addView(child, width, height)
         } else {
             layoutBase.addView(child, width, height)
@@ -92,7 +69,7 @@ class BaseStickySlide constructor(
     }
 
     override fun addView(child: View?, params: ViewGroup.LayoutParams?) {
-        if (layoutBase == child) {
+        if (motionLayout == child) {
             super.addView(child, params)
         } else {
             layoutBase.addView(child, params)
@@ -100,7 +77,7 @@ class BaseStickySlide constructor(
     }
 
     override fun addView(child: View?, index: Int, params: ViewGroup.LayoutParams?) {
-        if (layoutBase == child) {
+        if (motionLayout == child) {
             super.addView(child, index, params)
         } else {
             layoutBase.addView(child, index, params)

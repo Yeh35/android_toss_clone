@@ -27,12 +27,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-<!--    <me.sangoh.clone.toss.android.widget.stickyslide.BaseStickySlide-->
-<!--        android:id="@+id/motin"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"-->
-<!--        app:layoutDescription="@xml/widget_sticky_slide_view_scene"/>-->
-
 </androidx.constraintlayout.widget.ConstraintLayout>
 
 
