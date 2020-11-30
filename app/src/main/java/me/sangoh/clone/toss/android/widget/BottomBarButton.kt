@@ -11,7 +11,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.res.getResourceIdOrThrow
 import androidx.core.content.res.getStringOrThrow
-import com.example.toss.R
+import me.sangeoh.clone.toss.android.R
 
 @SuppressLint("AppCompatCustomView", "UseCompatLoadingForDrawables")
 class BottomBarButton(context: Context, attrs: AttributeSet) : FrameLayout(context, attrs) {

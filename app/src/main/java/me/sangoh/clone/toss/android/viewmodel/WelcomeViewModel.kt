@@ -3,7 +3,6 @@ package me.sangoh.clone.toss.android.viewmodel
 import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import me.sangoh.clone.toss.android.view.BaseViewModel
 
 class WelcomeViewModel(application: Application) : BaseViewModel(application) {
 

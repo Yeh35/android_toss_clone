@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.toss">
-
+    package="me.sangeoh.clone.toss.android">
     <!-- 권한 -->
     <uses-permission android:name="android.permission.READ_PHONE_NUMBERS" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
@@ -22,7 +21,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Andorid_toss_clone">
 
-        <activity android:name="me.sangoh.clone.toss.android.view.activity.LoginActivity"/>
+        <activity android:name="me.sangoh.clone.toss.android.view.activity.TestActivity"/>
+
+        <activity android:name="me.sangoh.clone.toss.android.view.activity.LoginActivity" />
         <activity android:name="me.sangoh.clone.toss.android.view.activity.WelcomeActivity" />
         <activity android:name="me.sangoh.clone.toss.android.view.activity.IntroActivity">
             <intent-filter>

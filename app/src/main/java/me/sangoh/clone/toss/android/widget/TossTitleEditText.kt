@@ -11,7 +11,7 @@ import android.widget.ImageButton
 import android.widget.TextView
 import androidx.annotation.ColorRes
 import androidx.core.content.res.getStringOrThrow
-import com.example.toss.R
+import me.sangeoh.clone.toss.android.R
 import me.sangoh.clone.toss.android.utils.listener.ITextChangedListener
 
 class TossTitleEditText(context: Context, attrs: AttributeSet) : TossEditText(context, attrs),

@@ -5,7 +5,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import me.sangoh.clone.toss.android.model.type.NewsAgency
 import me.sangoh.clone.toss.android.model.type.PhoneNumber
-import me.sangoh.clone.toss.android.view.BaseViewModel
 
 class LoginViewModel(application: Application) : BaseViewModel(application) {
 

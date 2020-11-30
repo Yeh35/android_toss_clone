@@ -2,7 +2,6 @@ package me.sangoh.clone.toss.android.view.dialog
 
 import android.app.Activity
 import android.app.Dialog
-import android.content.ClipDescription
 import android.content.DialogInterface
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -10,7 +9,7 @@ import android.os.Bundle
 import android.view.View
 import android.view.Window
 import android.widget.TextView
-import com.example.toss.R
+import me.sangeoh.clone.toss.android.R
 
 class CustomAlarmDialog : Dialog, View.OnClickListener {
 

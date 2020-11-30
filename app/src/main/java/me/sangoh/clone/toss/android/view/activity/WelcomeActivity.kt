@@ -7,7 +7,6 @@ import android.util.Log
 import android.view.View
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.lifecycle.ViewModelProvider
-import com.example.toss.R
 import com.example.toss.databinding.ActivityWelcomeBinding
 import kotlinx.coroutines.launch
 import me.sangoh.clone.toss.android.view.dialog.CustomAlarmDialog
@@ -18,6 +17,7 @@ import android.net.Uri
 import android.provider.Settings
 import android.view.LayoutInflater
 import android.widget.Button
+import me.sangeoh.clone.toss.android.R
 import me.sangoh.clone.toss.android.utils.*
 import me.sangoh.clone.toss.android.viewmodel.WelcomeViewModel
 import me.sangoh.clone.toss.android.widget.layout.StickySlideLayout

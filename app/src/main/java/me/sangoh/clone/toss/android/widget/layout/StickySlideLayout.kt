@@ -1,14 +1,13 @@
 package me.sangoh.clone.toss.android.widget.layout
 
 import android.content.Context
-import android.content.res.Resources
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import androidx.constraintlayout.motion.widget.MotionLayout
-import com.example.toss.R
+import me.sangeoh.clone.toss.android.R
 
 open class StickySlideLayout @JvmOverloads constructor(
     context: Context,

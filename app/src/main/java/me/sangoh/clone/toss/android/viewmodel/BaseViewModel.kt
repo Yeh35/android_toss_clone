@@ -1,4 +1,4 @@
-package me.sangoh.clone.toss.android.view
+package me.sangoh.clone.toss.android.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
