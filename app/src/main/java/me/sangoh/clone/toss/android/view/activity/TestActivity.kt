@@ -7,11 +7,11 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import me.sangeoh.clone.toss.android.R
-import me.sangoh.clone.toss.android.widget.stickyslide.BaseStickySlide
+import me.sangoh.clone.toss.android.widget.stickyslide.StickySlide
 
 class TestActivity : AppCompatActivity(), View.OnClickListener {
 
-    private lateinit var slideLayout: BaseStickySlide
+    private lateinit var slideLayout: StickySlide
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,7 +31,7 @@ class TestActivity : AppCompatActivity(), View.OnClickListener {
             ViewGroup.LayoutParams.MATCH_PARENT,
             ViewGroup.LayoutParams.MATCH_PARENT
         )
-        slideLayout = BaseStickySlide(this)
+        slideLayout = StickySlide(this)
         baseLayout.addView(slideLayout, slideLayoutParams)
 
         val textViewLayoutParams = ViewGroup.LayoutParams(
