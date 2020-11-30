@@ -1,4 +1,4 @@
-package me.sangoh.clone.toss.android.widget
+package me.sangoh.clone.toss.android.widget.stickyslide
 
 import android.content.Context
 import android.util.AttributeSet

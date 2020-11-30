@@ -9,7 +9,7 @@ import me.sangeoh.clone.toss.android.R
 import me.sangeoh.clone.toss.android.databinding.ActivityLoginBinding
 import me.sangoh.clone.toss.android.utils.listener.ITextChangedListener
 import me.sangoh.clone.toss.android.viewmodel.LoginViewModel
-import me.sangoh.clone.toss.android.widget.TextArrayStickySlide
+import me.sangoh.clone.toss.android.widget.stickyslide.TextArrayStickySlide
 import me.sangoh.clone.toss.android.widget.TossEditText
 import me.sangoh.clone.toss.android.widget.TossTitleEditText
 import me.sangoh.clone.toss.android.widget.TossTitleSocialSecurityNumberEditText

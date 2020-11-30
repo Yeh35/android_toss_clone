@@ -2,8 +2,41 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/baseLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="me.sangoh.clone.toss.android.view.activity.TestActivity">
 
+    <Button
+        android:id="@+id/btn_show"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="24dp"
+        android:text="show"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/btn_hide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginBottom="24dp"
+        android:text="hide"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+<!--    <me.sangoh.clone.toss.android.widget.stickyslide.BaseStickySlide-->
+<!--        android:id="@+id/motin"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        app:layoutDescription="@xml/widget_sticky_slide_view_scene"/>-->
+
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+
+
