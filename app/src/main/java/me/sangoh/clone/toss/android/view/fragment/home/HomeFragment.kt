@@ -5,8 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import com.example.toss.R
-import com.example.toss.databinding.FragmentHomeBinding
+import me.sangeoh.clone.toss.android.R
+import me.sangeoh.clone.toss.android.databinding.FragmentHomeBinding
 import me.sangoh.clone.toss.android.view.fragment.BaseFragment
 
 class HomeFragment : BaseFragment() {
