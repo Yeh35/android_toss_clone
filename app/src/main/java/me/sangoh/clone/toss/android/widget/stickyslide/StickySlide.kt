@@ -13,7 +13,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import me.sangeoh.clone.toss.android.R
 
-class StickySlide @JvmOverloads constructor(
+open class StickySlide @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
