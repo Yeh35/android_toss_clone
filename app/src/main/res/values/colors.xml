@@ -11,6 +11,7 @@
     <color name="gray">#666666</color>
     <color name="rad">#DC1E1E</color>
     <color name="transparent_gray">#66666666</color>
+    <color name="transparent_white">#66FFFFFF</color>
 
     <color name="bottom_bar_button_activate">#30394a</color>
     <color name="bottom_bar_button">#d0d4d8</color>

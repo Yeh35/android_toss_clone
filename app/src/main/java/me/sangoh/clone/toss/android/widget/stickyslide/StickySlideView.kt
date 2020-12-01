@@ -2,33 +2,29 @@ package me.sangoh.clone.toss.android.widget.stickyslide
 
 import android.content.Context
 import android.util.AttributeSet
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
-import android.widget.TextView
 import androidx.constraintlayout.motion.widget.MotionLayout
-import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.content.ContextCompat
 import me.sangeoh.clone.toss.android.R
 
-open class StickySlide @JvmOverloads constructor(
+open class StickySlideView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
 ) : FrameLayout(context, attrs, defStyleAttr) {
 
     private val motionLayout: MotionLayout
-    private val layoutBase: FrameLayout
+    protected val baseLayout: FrameLayout
 
     init {
         val li = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         motionLayout = li.inflate(R.layout.custom_view_sticky_slide, this, false) as MotionLayout
         this.addView(motionLayout)
 
-        layoutBase = motionLayout.findViewById(R.id.layout_base)
-        println(layoutBase.id)
+        baseLayout = motionLayout.findViewById(R.id.layout_base)
+//        this.hide()
     }
 
     fun show() {
@@ -48,7 +44,7 @@ open class StickySlide @JvmOverloads constructor(
         if (motionLayout == child) {
             super.addView(child)
         } else {
-            layoutBase.addView(child)
+            baseLayout.addView(child)
         }
     }
 
@@ -56,7 +52,7 @@ open class StickySlide @JvmOverloads constructor(
         if (motionLayout == child) {
             super.addView(child, index)
         } else {
-            layoutBase.addView(child, index)
+            baseLayout.addView(child, index)
         }
     }
 
@@ -64,7 +60,7 @@ open class StickySlide @JvmOverloads constructor(
         if (motionLayout == child) {
             super.addView(child, width, height)
         } else {
-            layoutBase.addView(child, width, height)
+            baseLayout.addView(child, width, height)
         }
     }
 
@@ -72,7 +68,7 @@ open class StickySlide @JvmOverloads constructor(
         if (motionLayout == child) {
             super.addView(child, params)
         } else {
-            layoutBase.addView(child, params)
+            baseLayout.addView(child, params)
         }
     }
 
@@ -80,7 +76,7 @@ open class StickySlide @JvmOverloads constructor(
         if (motionLayout == child) {
             super.addView(child, index, params)
         } else {
-            layoutBase.addView(child, index, params)
+            baseLayout.addView(child, index, params)
         }
     }
 }
