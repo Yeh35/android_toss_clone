@@ -5,8 +5,17 @@
     android:id="@+id/motin"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/transparent_gray"
     app:layoutDescription="@xml/custom_view_sticky_slide_scene">
+
+    <View
+        android:id="@+id/view_close"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/transparent_gray"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
 
     <FrameLayout
         android:id="@+id/layout_base"
@@ -14,9 +23,10 @@
         android:layout_height="wrap_content"
         android:background="@drawable/rounded_white_layout"
         android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="@+id/view"
-        app:layout_constraintEnd_toEndOf="@+id/view"
-        app:layout_constraintStart_toStartOf="@+id/view"/>
+        android:nextFocusDown="@id/layout_base"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
 
 </androidx.constraintlayout.motion.widget.MotionLayout>
 

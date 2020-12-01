@@ -1,37 +1,57 @@
 package me.sangoh.clone.toss.android.widget.stickyslide
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.util.AttributeSet
+import android.util.Log
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import me.sangeoh.clone.toss.android.R
 import me.sangoh.clone.toss.android.utils.dpToPx
 
 /**
  * StickySlideView에 RecyclerView를 적용한 것이다.
  */
-class RecyclerStickySlideView constructor(
+abstract class RecyclerStickySlideView constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0,
-    verticalSize: Int = 300,
-    title: String,
-    data: List<String>
 ) : StickySlideView(context, attrs, defStyleAttr) {
+
+    //properties
+    var title: String
+        get() {
+            return tvTitle.text.toString()
+        }
+        set(value) {
+            tvTitle.text = value
+        }
+
+    protected var verticalSize: Int = 300
+    protected val recyclerView: RecyclerView
 
     private val tvTitle: TextView
     private val btnClear: ImageButton
     private val lineTitle: View
 
+    private var subTrasitionListener: ITrasitionListener? = null
+    private var isRecyclerViewTopOfList = false
+
     init {
         val li = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        val inflateLayout = li.inflate(R.layout.custom_view_recycler_sticky_slide, null) as LinearLayout
+        val inflateLayout =
+            li.inflate(R.layout.custom_view_recycler_sticky_slide, null) as LinearLayout
         this.addView(inflateLayout)
 
         tvTitle = inflateLayout.findViewById(R.id.tv_title)
@@ -39,7 +59,7 @@ class RecyclerStickySlideView constructor(
         lineTitle = inflateLayout.findViewById(R.id.line_title)
 
         // 높이 조절때문에 코드로 추가
-        val recyclerView = object : RecyclerView(context) {
+        recyclerView = object : RecyclerView(context) {
             override fun onMeasure(widthSpec: Int, heightSpec: Int) {
                 // heightSpec 재정의
                 val maxHeightSpec = MeasureSpec.makeMeasureSpec(
@@ -49,12 +69,35 @@ class RecyclerStickySlideView constructor(
                 super.onMeasure(widthSpec, maxHeightSpec)
             }
         }
-        inflateLayout.addView(recyclerView, ViewGroup.LayoutParams(
-            ViewGroup.LayoutParams.MATCH_PARENT,
-            ViewGroup.LayoutParams.WRAP_CONTENT
-        ))
+        recyclerView.isFocusable = true
+        recyclerView.isFocusableInTouchMode = true
 
-        recyclerView.layoutManager = LinearLayoutManager(context)
-        recyclerView.adapter = TextListAdapter(data)
+        inflateLayout.addView(
+            recyclerView, ViewGroup.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT
+            )
+        )
+
+        btnClear.setOnClickListener { 
+            this.close()
+        }
+
+        super.setTrasitionListener(object : ITrasitionListener {
+            override fun onTransitionCompleted(layout: MotionLayout, state: StickySlideState) {
+                if (state == StickySlideState.SHOW) {
+                    this@RecyclerStickySlideView.transitionEnable(false)
+                }
+
+                subTrasitionListener?.onTransitionCompleted(layout, state)
+            }
+        })
+    }
+
+    /**
+     * 해당 클래스에서 사용해야해서 랩핑하였다.
+     */
+    override fun setTrasitionListener(listener: ITrasitionListener) {
+        subTrasitionListener = listener
     }
 }

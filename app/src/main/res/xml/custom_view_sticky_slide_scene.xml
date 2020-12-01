@@ -4,6 +4,7 @@
     xmlns:motion="http://schemas.android.com/tools">
 
     <Transition
+        android:id="@+id/transition_sticky_slide"
         app:constraintSetEnd="@id/end"
         app:constraintSetStart="@id/start">
         <OnSwipe

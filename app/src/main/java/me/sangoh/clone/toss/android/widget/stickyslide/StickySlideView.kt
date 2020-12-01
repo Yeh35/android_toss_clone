@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import androidx.constraintlayout.motion.widget.MotionLayout
+import androidx.constraintlayout.motion.widget.MotionScene
 import me.sangeoh.clone.toss.android.R
 
 open class StickySlideView @JvmOverloads constructor(
@@ -15,29 +16,42 @@ open class StickySlideView @JvmOverloads constructor(
     defStyleAttr: Int = 0
 ) : FrameLayout(context, attrs, defStyleAttr) {
 
-    private val motionLayout: MotionLayout
     protected val baseLayout: FrameLayout
+    private val motionLayout: MotionLayout
+
+    private val transition: MotionScene.Transition
+    private var trasitionListener: ITrasitionListener? = null
 
     init {
+        this.visibility = View.GONE
+
         val li = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        motionLayout = li.inflate(R.layout.custom_view_sticky_slide, this, false) as MotionLayout
+        motionLayout = li.inflate(R.layout.custom_view_sticky_slide, null, false) as MotionLayout
         this.addView(motionLayout)
 
+        val closeView: View = motionLayout.findViewById(R.id.view_close)
+        closeView.setOnClickListener {
+            this.close()
+        }
+
         baseLayout = motionLayout.findViewById(R.id.layout_base)
-//        this.hide()
-    }
 
-    fun show() {
-        this.visibility = View.VISIBLE
-        motionLayout.transitionToEnd()
-    }
+        motionLayout.setTransitionListener(object : MotionLayout.TransitionListener {
+            override fun onTransitionStarted(layout: MotionLayout?, startId: Int, endId: Int) {}
+            override fun onTransitionChange(layout: MotionLayout?,startId: Int,endId: Int,progress: Float) {}
+            override fun onTransitionTrigger(layout: MotionLayout?,triggerId: Int,positive: Boolean,progress: Float) {}
+            override fun onTransitionCompleted(layout: MotionLayout?, currentId: Int) {
+                if (currentId == R.id.start) {
+                    this@StickySlideView.visibility = View.GONE
+                    trasitionListener?.onTransitionCompleted(motionLayout, StickySlideState.CLOSE)
+                } else {
+                    baseLayout.requestFocus()
+                    trasitionListener?.onTransitionCompleted(motionLayout, StickySlideState.SHOW)
+                }
+            }
+        })
 
-    fun close() {
-        motionLayout.transitionToStart()
-    }
-
-    fun hide() {
-        this.visibility = View.GONE
+        transition = motionLayout.getTransition(R.id.transition_sticky_slide)
     }
 
     override fun addView(child: View?) {
@@ -79,4 +93,24 @@ open class StickySlideView @JvmOverloads constructor(
             baseLayout.addView(child, index, params)
         }
     }
+
+    fun show() {
+        this.visibility = View.VISIBLE
+        motionLayout.transitionToEnd()
+    }
+
+    fun close() {
+        motionLayout.transitionToStart()
+    }
+
+    open fun setTrasitionListener(listener: ITrasitionListener) {
+        this.trasitionListener = listener
+    }
+
+    protected fun transitionEnable(boolean: Boolean) {
+        if (transition.isEnabled != boolean) {
+            transition.setEnable(boolean)
+        }
+    }
+
 }

@@ -17,6 +17,15 @@
         app:layout_constraintTop_toTopOf="@+id/btn_hide" />
 
     <Button
+        android:id="@+id/btn_data_set"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="dataSet"
+        app:layout_constraintEnd_toStartOf="@+id/btn_show"
+        app:layout_constraintStart_toEndOf="@+id/btn_hide"
+        app:layout_constraintTop_toTopOf="@+id/btn_hide" />
+
+    <Button
         android:id="@+id/btn_hide"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
