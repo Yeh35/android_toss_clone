@@ -1,11 +1,8 @@
 package me.sangoh.clone.toss.android.widget.stickyslide
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.util.AttributeSet
-import android.util.Log
 import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
@@ -13,10 +10,6 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 import me.sangeoh.clone.toss.android.R
 import me.sangoh.clone.toss.android.utils.dpToPx
 
@@ -45,7 +38,7 @@ abstract class RecyclerStickySlideView constructor(
     private val btnClear: ImageButton
     private val lineTitle: View
 
-    private var subTrasitionListener: ITrasitionListener? = null
+    private var subTrasitionListener: ITransitionListener? = null
     private var isRecyclerViewTopOfList = false
 
     init {
@@ -83,7 +76,7 @@ abstract class RecyclerStickySlideView constructor(
             this.close()
         }
 
-        super.setTrasitionListener(object : ITrasitionListener {
+        super.setTransitionListener(object : ITransitionListener {
             override fun onTransitionCompleted(layout: MotionLayout, state: StickySlideState) {
                 if (state == StickySlideState.SHOW) {
                     this@RecyclerStickySlideView.transitionEnable(false)
@@ -97,7 +90,7 @@ abstract class RecyclerStickySlideView constructor(
     /**
      * 해당 클래스에서 사용해야해서 랩핑하였다.
      */
-    override fun setTrasitionListener(listener: ITrasitionListener) {
+    override fun setTransitionListener(listener: ITransitionListener) {
         subTrasitionListener = listener
     }
 }

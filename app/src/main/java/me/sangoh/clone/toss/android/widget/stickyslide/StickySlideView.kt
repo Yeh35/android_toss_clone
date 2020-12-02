@@ -20,7 +20,7 @@ open class StickySlideView @JvmOverloads constructor(
     private val motionLayout: MotionLayout
 
     private val transition: MotionScene.Transition
-    private var trasitionListener: ITrasitionListener? = null
+    private var transitionListener: ITransitionListener? = null
 
     init {
         this.visibility = View.GONE
@@ -43,10 +43,10 @@ open class StickySlideView @JvmOverloads constructor(
             override fun onTransitionCompleted(layout: MotionLayout?, currentId: Int) {
                 if (currentId == R.id.start) {
                     this@StickySlideView.visibility = View.GONE
-                    trasitionListener?.onTransitionCompleted(motionLayout, StickySlideState.CLOSE)
+                    transitionListener?.onTransitionCompleted(motionLayout, StickySlideState.CLOSE)
                 } else {
                     baseLayout.requestFocus()
-                    trasitionListener?.onTransitionCompleted(motionLayout, StickySlideState.SHOW)
+                    transitionListener?.onTransitionCompleted(motionLayout, StickySlideState.SHOW)
                 }
             }
         })
@@ -103,8 +103,8 @@ open class StickySlideView @JvmOverloads constructor(
         motionLayout.transitionToStart()
     }
 
-    open fun setTrasitionListener(listener: ITrasitionListener) {
-        this.trasitionListener = listener
+    open fun setTransitionListener(i: ITransitionListener) {
+        this.transitionListener = i
     }
 
     protected fun transitionEnable(boolean: Boolean) {

@@ -1,6 +1,5 @@
 package me.sangoh.clone.toss.android.view.activity
 
-import android.content.DialogInterface
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
@@ -15,21 +14,24 @@ import android.content.Intent
 import android.net.Uri
 import android.provider.Settings
 import android.view.LayoutInflater
+import android.view.ViewGroup
 import android.widget.Button
 import me.sangeoh.clone.toss.android.R
 import me.sangeoh.clone.toss.android.databinding.ActivityWelcomeBinding
 import me.sangoh.clone.toss.android.utils.*
 import me.sangoh.clone.toss.android.viewmodel.WelcomeViewModel
-import me.sangoh.clone.toss.android.widget.layout.StickySlideLayout
+import me.sangoh.clone.toss.android.widget.stickyslide.ITransitionListener
+import me.sangoh.clone.toss.android.widget.stickyslide.StickySlideState
+import me.sangoh.clone.toss.android.widget.stickyslide.StickySlideView
 
 class WelcomeActivity : BaseActivity<ActivityWelcomeBinding>(R.layout.activity_welcome),
-    MotionLayout.TransitionListener, View.OnClickListener {
+    ITransitionListener, View.OnClickListener {
     private val RESULT_CODE_SETTING = 20105
 
     private var permissionDeniedCount = 0
 
     private lateinit var btnContinue: Button
-    private lateinit var slideLayout: StickySlideLayout
+    private lateinit var slideLayout: StickySlideView
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,10 +41,15 @@ class WelcomeActivity : BaseActivity<ActivityWelcomeBinding>(R.layout.activity_w
             WelcomeViewModel::class.java
         )
 
-        slideLayout = binding.motionBase
+//        slideLayout = binding.motionBase
+        slideLayout = StickySlideView(this)
+        this.addContentView(slideLayout, ViewGroup.LayoutParams(
+            ViewGroup.LayoutParams.MATCH_PARENT,
+            ViewGroup.LayoutParams.MATCH_PARENT,
+        ))
 
         val li = this.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        val layoutPermission = li.inflate(R.layout.layout_permission, binding.motionBase, false)
+        val layoutPermission = li.inflate(R.layout.layout_permission, slideLayout, false)
         slideLayout.addView(layoutPermission)
 
         btnContinue = layoutPermission.findViewById(R.id.btn_continue)
@@ -57,7 +64,7 @@ class WelcomeActivity : BaseActivity<ActivityWelcomeBinding>(R.layout.activity_w
     override fun onResume() {
         super.onResume()
 
-        Thread(Runnable {
+        Thread {
             scopeMain.launch {
                 animationAppearWhileComingUp(binding.layoutForAnimation)
             }
@@ -67,25 +74,7 @@ class WelcomeActivity : BaseActivity<ActivityWelcomeBinding>(R.layout.activity_w
             scopeMain.launch {
                 animationRotateSidewaysAndHighlight(binding.ivGuard)
             }
-        }).start()
-    }
-
-    override fun onTransitionTrigger(p0: MotionLayout?, p1: Int, p2: Boolean, p3: Float) {}
-    override fun onTransitionStarted(p0: MotionLayout?, p1: Int, p2: Int) {}
-    override fun onTransitionChange(p0: MotionLayout?, p1: Int, p2: Int, p3: Float) {}
-
-    override fun onTransitionCompleted(motionLayout: MotionLayout, currentId: Int) {
-        Log.d("Welcome", "onTransitionCompleted currentId(${currentId})")
-        when (currentId) {
-            R.id.start -> {
-                if (requestPermissions()) {
-                    nextStep()
-                }
-            }
-            R.id.end -> {
-            }
-            else -> error("정의되지 않은 상태")
-        }
+        }.start()
     }
 
     override fun onClick(view: View?) {
@@ -93,12 +82,12 @@ class WelcomeActivity : BaseActivity<ActivityWelcomeBinding>(R.layout.activity_w
             binding.btnStart -> {
 //                binding.motionBase.visibility = View.VISIBLE
 //                binding.motionBase.transitionToEnd()
-                binding.motionBase.show()
+                slideLayout.show()
             }
             btnContinue -> {
 //                binding.motionBase.visibility = View.VISIBLE
 //                binding.motionBase.transitionToStart()
-                binding.motionBase.close()
+                slideLayout.close()
             }
         }
     }
@@ -148,20 +137,20 @@ class WelcomeActivity : BaseActivity<ActivityWelcomeBinding>(R.layout.activity_w
             val alarm = CustomAlarmDialog(
                 this,
                 title,
-                description,
-                DialogInterface.OnClickListener { _, _ ->
+                description
+            ) { _, _ ->
 
-                    if (permissionDeniedCount > 2) {
-                        val intent = Intent(
-                            Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
-                            Uri.fromParts("package", packageName, null)
-                        )
-                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                        startActivityForResult(intent, RESULT_CODE_SETTING)   // 6
-                    } else {
-                        requestPermissions()
-                    }
-                })
+                if (permissionDeniedCount > 2) {
+                    val intent = Intent(
+                        Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
+                        Uri.fromParts("package", packageName, null)
+                    )
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                    startActivityForResult(intent, RESULT_CODE_SETTING)   // 6
+                } else {
+                    requestPermissions()
+                }
+            }
             alarm.show()
             return
         }
@@ -192,6 +181,21 @@ class WelcomeActivity : BaseActivity<ActivityWelcomeBinding>(R.layout.activity_w
         val startIntent = Intent(this, LoginActivity::class.java)
         startActivity(startIntent)
         this.finish()
+    }
+
+    override fun onTransitionCompleted(layout: MotionLayout, state: StickySlideState) {
+        Log.d("Welcome", "onTransitionCompleted state(${state})")
+
+        @Suppress("REDUNDANT_ELSE_IN_WHEN")
+        when (state) {
+            StickySlideState.SHOW -> { }
+            StickySlideState.CLOSE -> {
+                if (requestPermissions()) {
+                    nextStep()
+                }
+            }
+            else -> error("정의되지 않은 상태")
+        }
     }
 }
 

@@ -2,7 +2,7 @@ package me.sangoh.clone.toss.android.widget.stickyslide
 
 import androidx.constraintlayout.motion.widget.MotionLayout
 
-interface ITrasitionListener {
+interface ITransitionListener {
 
     /**
      * 동작이 끝나면 호출된다.
