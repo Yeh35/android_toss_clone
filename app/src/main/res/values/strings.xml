@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">andorid_toss_clone</string>
+    <string name="app_name">토스 clone</string>
     <string name="home">홈</string>
     <string name="consumption">내 소비</string>
     <string name="all">전체</string>
