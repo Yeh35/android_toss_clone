@@ -2,17 +2,19 @@ package me.sangoh.clone.toss.android.view.activity
 
 import android.os.Bundle
 import android.view.View
+import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.Button
+import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
 import me.sangeoh.clone.toss.android.R
 import me.sangeoh.clone.toss.android.databinding.ActivityLoginBinding
 import me.sangoh.clone.toss.android.utils.listener.ITextChangedListener
 import me.sangoh.clone.toss.android.viewmodel.LoginViewModel
-import me.sangoh.clone.toss.android.widget.stickyslide.RecyclerStickySlideView
-import me.sangoh.clone.toss.android.widget.TossEditText
-import me.sangoh.clone.toss.android.widget.TossTitleEditText
-import me.sangoh.clone.toss.android.widget.TossTitleSocialSecurityNumberEditText
+import me.sangoh.clone.toss.android.widget.edittext.TossEditText
+import me.sangoh.clone.toss.android.widget.edittext.TossTitleEditText
+import me.sangoh.clone.toss.android.widget.edittext.TossTitleSocialSecurityNumberEditText
+import me.sangoh.clone.toss.android.widget.stickyslide.TextListStickySlideView
 
 
 class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login),
@@ -20,14 +22,14 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
 
     private lateinit var viewModel: LoginViewModel
 
+    private lateinit var tvDescription: TextView
     private lateinit var editName: TossTitleEditText
     private lateinit var editSocialSecurityNumber: TossTitleSocialSecurityNumberEditText
     private lateinit var editNewsAgency: TossTitleEditText
     private lateinit var editPoneNumber: TossTitleEditText
     private lateinit var btnOk: Button
-//    private lateinit var slideLayout: StickySlideLayout
 
-    private lateinit var textArraySlideSlide: RecyclerStickySlideView
+    private lateinit var newsAgencySlideSlide: TextListStickySlideView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,25 +39,38 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
         binding.viewModel = viewModel
 
         //buding
+        tvDescription = binding.tvDescription
         editName = binding.editName
         editSocialSecurityNumber = binding.editSocialSecurityNumber
         editNewsAgency = binding.editNewsAgency
         editPoneNumber = binding.editPoneNumber
         btnOk = binding.btnOk
-//        slideLayout = binding.motionBase
+
+        newsAgencySlideSlide = TextListStickySlideView(this)
+        newsAgencySlideSlide.data = viewModel.newsAgencyList
+        addContentView(
+            newsAgencySlideSlide, ViewGroup.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.MATCH_PARENT
+            )
+        )
 
         editSocialSecurityNumber.visibility = View.GONE
         editNewsAgency.visibility = View.GONE
         editPoneNumber.visibility = View.GONE
+        btnOk.isEnabled = false
 
         btnOk.setOnClickListener(this)
-        editNewsAgency.clickListener = this
-
+        editNewsAgency.setOnClickListener(this)
         editName.setOnTextChangedListener(this)
         editSocialSecurityNumber.setOnTextChangedListener(this)
         editNewsAgency.setOnTextChangedListener(this)
 
+        editName.setNextState(editSocialSecurityNumber)
+        editSocialSecurityNumber.setNextState(editNewsAgency)
+        editNewsAgency.setNextState(editPoneNumber)
         editName.requestFocus()
+
     }
 
     override fun onClick(v: View?) {
@@ -64,7 +79,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
 
             }
             editNewsAgency -> {
-
+                newsAgencySlideSlide.show()
             }
             else -> {
                 error("잘못된 호출입니다.")
@@ -77,20 +92,24 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
             editName -> {
                 if (editSocialSecurityNumber.visibility == View.GONE && target.validation()) {
                     editSocialSecurityNumber.visibility = View.VISIBLE
+                    editName.setDoneState()
+                    tvDescription.text = resources.getText(R.string.please_input_social_security_number)
                 }
-                editSocialSecurityNumber.requestFocus()
             }
             editSocialSecurityNumber -> {
                 if (editNewsAgency.visibility == View.GONE && target.validation()) {
                     editNewsAgency.visibility = View.VISIBLE
+                    editSocialSecurityNumber.setDoneState()
+                    tvDescription.text = resources.getText(R.string.please_input_news_agency)
+                    newsAgencySlideSlide.show()
                 }
-                editNewsAgency.requestFocus()
             }
             editNewsAgency -> {
                 if (editPoneNumber.visibility == View.GONE && target.validation()) {
                     editPoneNumber.visibility = View.VISIBLE
+                    editNewsAgency.setDoneState()
+                    tvDescription.text = resources.getText(R.string.please_input_phone_number)
                 }
-                editPoneNumber.requestFocus()
             }
             else -> {
                 error("잘못된 호출입니다.")

@@ -2,7 +2,6 @@ package me.sangoh.clone.toss.android.widget.stickyslide
 
 import android.content.Context
 import android.util.AttributeSet
-import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
@@ -39,12 +38,11 @@ abstract class RecyclerStickySlideView constructor(
     private val lineTitle: View
 
     private var subTrasitionListener: ITransitionListener? = null
-    private var isRecyclerViewTopOfList = false
 
     init {
-        val li = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+//        val li = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val inflateLayout =
-            li.inflate(R.layout.custom_view_recycler_sticky_slide, null) as LinearLayout
+            View.inflate(context, R.layout.custom_view_recycler_sticky_slide, null) as LinearLayout
         this.addView(inflateLayout)
 
         tvTitle = inflateLayout.findViewById(R.id.tv_title)
@@ -72,7 +70,7 @@ abstract class RecyclerStickySlideView constructor(
             )
         )
 
-        btnClear.setOnClickListener { 
+        btnClear.setOnClickListener {
             this.close()
         }
 
@@ -90,7 +88,7 @@ abstract class RecyclerStickySlideView constructor(
     /**
      * 해당 클래스에서 사용해야해서 랩핑하였다.
      */
-    override fun setTransitionListener(listener: ITransitionListener) {
-        subTrasitionListener = listener
+    override fun setTransitionListener(i: ITransitionListener) {
+        subTrasitionListener = i
     }
 }

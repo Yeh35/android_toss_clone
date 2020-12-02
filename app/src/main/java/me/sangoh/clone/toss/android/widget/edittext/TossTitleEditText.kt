@@ -1,11 +1,11 @@
-package me.sangoh.clone.toss.android.widget
+package me.sangoh.clone.toss.android.widget.edittext
 
 import android.content.Context
-import android.graphics.Rect
 import android.util.AttributeSet
 import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
+import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.TextView
@@ -15,24 +15,20 @@ import me.sangeoh.clone.toss.android.R
 import me.sangoh.clone.toss.android.utils.listener.ITextChangedListener
 
 class TossTitleEditText(context: Context, attrs: AttributeSet) : TossEditText(context, attrs),
-    View.OnFocusChangeListener, View.OnKeyListener, View.OnClickListener {
+    View.OnFocusChangeListener, TextView.OnEditorActionListener {
 
     //properties
     val title: String
     val inputType: Int
-    val defaultErrorMsg: String
 
     private val tvTitle: TextView
-    private val tvErrorMessage: TextView
     private val editText: EditText
     private val btnPopup: ImageButton
     private val isPopup: Boolean
     private val lineForEdit: View
 
-    private var validator: IValueValidator? = null
     private var textChangedListener: ITextChangedListener<TossEditText>? = null
-
-    var clickListener: OnClickListener? = null
+    private var nextView: View? = null
 
     init {
         val li = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
@@ -45,13 +41,11 @@ class TossTitleEditText(context: Context, attrs: AttributeSet) : TossEditText(co
             0, 0
         ).apply {
             title = getStringOrThrow(R.styleable.TossTitleEditText_title)
-            defaultErrorMsg = getStringOrThrow(R.styleable.TossTitleEditText_defaultErrorMsg)
             isPopup = getBoolean(R.styleable.TossTitleEditText_is_popup, false)
             inputType = getInt(R.styleable.TossTitleEditText_android_inputType, 1)
         }
 
         tvTitle = baseView.findViewById(R.id.tv_title)
-        tvErrorMessage = baseView.findViewById(R.id.tv_error_message)
         editText = baseView.findViewById(R.id.edit_text)
         btnPopup = baseView.findViewById(R.id.btn_popup)
         lineForEdit = baseView.findViewById(R.id.line_for_edit)
@@ -60,37 +54,39 @@ class TossTitleEditText(context: Context, attrs: AttributeSet) : TossEditText(co
         if (isPopup) {
             btnPopup.visibility = View.VISIBLE
             editText.inputType = 0
-            btnPopup.setOnClickListener(this)
-            editText.setOnClickListener(this)
         } else {
             btnPopup.visibility = View.GONE
             editText.inputType = inputType
         }
 
         editText.onFocusChangeListener = this
-        editText.setOnKeyListener(this)
-    }
-
-    override fun setOnClickListener(listener: OnClickListener?) {
-        editText.setOnClickListener(listener)
-        btnPopup.setOnClickListener(listener)
+        editText.setOnEditorActionListener(this)
     }
 
     override fun onFocusChange(v: View?, hasFocus: Boolean) {
-        val colorId = if (hasFocus) R.color.blue else R.color.gray
-        this.setColor(colorId)
+        if (hasFocus) {
+            this.setColor(R.color.blue)
+        } else {
+            this.setColor(R.color.gray)
+        }
     }
 
     override fun validation(): Boolean {
-        return if (validator != null) {
-            validator!!.validation(editText.text.toString())
-        } else {
-            true
-        }
+        return editText.text.toString().length >= 2
     }
 
     override fun setOnTextChangedListener(textChangedListener: ITextChangedListener<TossEditText>) {
         this.textChangedListener = textChangedListener
+    }
+
+    override fun setNextState(nextView: View) {
+        editText.imeOptions = EditorInfo.IME_ACTION_NEXT
+        this.nextView = nextView
+    }
+
+    override fun setDoneState() {
+        editText.imeOptions = EditorInfo.IME_ACTION_DONE
+        this.nextView = null
     }
 
     private fun setColor(@ColorRes colorId: Int) {
@@ -100,38 +96,17 @@ class TossTitleEditText(context: Context, attrs: AttributeSet) : TossEditText(co
         lineForEdit.setBackgroundColor(settingColor)
     }
 
-    override fun onKey(v: View?, keyCode: Int, event: KeyEvent?): Boolean {
-        //Enter key Action
-        if ((event!!.action == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
-            //Enter key push process
-            if (validator != null) {
-                if (validator!!.validation(editText.text.toString())) {
-                    tvErrorMessage.text = ""
-                    setColor(R.color.blue)
-                } else {
-                    tvErrorMessage.text = defaultErrorMsg
-                    setColor(R.color.rad)
-                }
+    override fun onEditorAction(v: TextView?, actionId: Int, event: KeyEvent?): Boolean {
+        when(actionId) {
+            EditorInfo.IME_ACTION_DONE -> {}
+            EditorInfo.IME_ACTION_NEXT -> {
+                nextView?.requestFocus()
+                textChangedListener?.onTextChanged(this@TossTitleEditText)
+                return true
             }
-
-            textChangedListener?.onTextChanged(this@TossTitleEditText)
-//            return true
-            return false
         }
-        return true
+        return false
     }
 
-    override fun requestFocus(direction: Int, previouslyFocusedRect: Rect?): Boolean {
-        return if (isPopup) {
-            clickListener?.onClick(this)
-            return clickListener != null
-        } else {
-            super.requestFocus(direction, previouslyFocusedRect)
-        }
-    }
-
-    override fun onClick(v: View?) {
-        clickListener?.onClick(this)
-    }
 
 }

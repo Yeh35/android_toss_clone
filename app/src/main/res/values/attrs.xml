@@ -11,13 +11,11 @@
 
     <declare-styleable name="TossTitleEditText">
         <attr name="title"/>
-        <attr name="defaultErrorMsg"/>
         <attr name="is_popup" format="boolean"/>
         <attr name="android:inputType"/>
     </declare-styleable>
 
     <declare-styleable name="TossTitleSocialSecurityNumberEditText">
         <attr name="title"/>
-        <attr name="defaultErrorMsg"/>
     </declare-styleable>
 </resources>

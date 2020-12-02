@@ -24,6 +24,12 @@ class LoginViewModel(application: Application) : BaseViewModel(application) {
     val phoneNumber: LiveData<PhoneNumber>
         get() = _phoneNumber
 
-    private val newsAgencyList: Array<NewsAgency> = NewsAgency.values()
+    val newsAgencyList: ArrayList<String> = ArrayList()
+
+    init {
+        for (newsAgency in NewsAgency.values()) {
+            newsAgencyList.add(newsAgency.toString())
+        }
+    }
 
 }

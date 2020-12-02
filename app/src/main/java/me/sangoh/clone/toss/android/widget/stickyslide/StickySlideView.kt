@@ -2,7 +2,6 @@ package me.sangoh.clone.toss.android.widget.stickyslide
 
 import android.content.Context
 import android.util.AttributeSet
-import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
@@ -25,8 +24,8 @@ open class StickySlideView @JvmOverloads constructor(
     init {
         this.visibility = View.GONE
 
-        val li = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        motionLayout = li.inflate(R.layout.custom_view_sticky_slide, null, false) as MotionLayout
+//        val li = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+        motionLayout = View.inflate(context, R.layout.custom_view_sticky_slide, null) as MotionLayout
         this.addView(motionLayout)
 
         val closeView: View = motionLayout.findViewById(R.id.view_close)
