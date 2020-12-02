@@ -33,6 +33,7 @@
     <string name="please_input_social_security_number">주민등록번호를 입력해주세요</string>
     <string name="news_agency">통신사</string>
     <string name="please_input_news_agency">통신사를 입력해주세요</string>
+    <string name="please_push_ok">확인 버튼을 눌러주세요</string>
 
     <!--특수문자-->
     <string name="hyphen">—</string>

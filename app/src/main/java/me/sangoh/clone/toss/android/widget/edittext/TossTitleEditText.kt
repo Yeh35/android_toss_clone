@@ -1,6 +1,7 @@
 package me.sangoh.clone.toss.android.widget.edittext
 
 import android.content.Context
+import android.text.Editable
 import android.util.AttributeSet
 import android.view.KeyEvent
 import android.view.LayoutInflater
@@ -20,6 +21,11 @@ class TossTitleEditText(context: Context, attrs: AttributeSet) : TossEditText(co
     //properties
     val title: String
     val inputType: Int
+    var text: String
+        get() = editText.text.toString()
+        set(value) {
+            editText.setText(value)
+        }
 
     private val tvTitle: TextView
     private val editText: EditText
@@ -72,7 +78,7 @@ class TossTitleEditText(context: Context, attrs: AttributeSet) : TossEditText(co
     }
 
     override fun validation(): Boolean {
-        return editText.text.toString().length >= 2
+        return editText.text.toString().length >= 1
     }
 
     override fun setOnTextChangedListener(textChangedListener: ITextChangedListener<TossEditText>) {
@@ -89,13 +95,6 @@ class TossTitleEditText(context: Context, attrs: AttributeSet) : TossEditText(co
         this.nextView = null
     }
 
-    private fun setColor(@ColorRes colorId: Int) {
-        val settingColor = resource.getColor(colorId)
-
-        tvTitle.setTextColor(settingColor)
-        lineForEdit.setBackgroundColor(settingColor)
-    }
-
     override fun onEditorAction(v: TextView?, actionId: Int, event: KeyEvent?): Boolean {
         when(actionId) {
             EditorInfo.IME_ACTION_DONE -> {}
@@ -108,5 +107,11 @@ class TossTitleEditText(context: Context, attrs: AttributeSet) : TossEditText(co
         return false
     }
 
+    private fun setColor(@ColorRes colorId: Int) {
+        val settingColor = resource.getColor(colorId)
+
+        tvTitle.setTextColor(settingColor)
+        lineForEdit.setBackgroundColor(settingColor)
+    }
 
 }

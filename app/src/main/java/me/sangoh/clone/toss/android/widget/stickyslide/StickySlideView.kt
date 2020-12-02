@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.FrameLayout
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.constraintlayout.motion.widget.MotionScene
@@ -21,11 +22,14 @@ open class StickySlideView @JvmOverloads constructor(
     private val transition: MotionScene.Transition
     private var transitionListener: ITransitionListener? = null
 
+    private val imm: InputMethodManager
+
     init {
         this.visibility = View.GONE
 
 //        val li = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        motionLayout = View.inflate(context, R.layout.custom_view_sticky_slide, null) as MotionLayout
+        motionLayout =
+            View.inflate(context, R.layout.custom_view_sticky_slide, null) as MotionLayout
         this.addView(motionLayout)
 
         val closeView: View = motionLayout.findViewById(R.id.view_close)
@@ -37,8 +41,22 @@ open class StickySlideView @JvmOverloads constructor(
 
         motionLayout.setTransitionListener(object : MotionLayout.TransitionListener {
             override fun onTransitionStarted(layout: MotionLayout?, startId: Int, endId: Int) {}
-            override fun onTransitionChange(layout: MotionLayout?,startId: Int,endId: Int,progress: Float) {}
-            override fun onTransitionTrigger(layout: MotionLayout?,triggerId: Int,positive: Boolean,progress: Float) {}
+            override fun onTransitionChange(
+                layout: MotionLayout?,
+                startId: Int,
+                endId: Int,
+                progress: Float
+            ) {
+            }
+
+            override fun onTransitionTrigger(
+                layout: MotionLayout?,
+                triggerId: Int,
+                positive: Boolean,
+                progress: Float
+            ) {
+            }
+
             override fun onTransitionCompleted(layout: MotionLayout?, currentId: Int) {
                 if (currentId == R.id.start) {
                     this@StickySlideView.visibility = View.GONE
@@ -51,6 +69,8 @@ open class StickySlideView @JvmOverloads constructor(
         })
 
         transition = motionLayout.getTransition(R.id.transition_sticky_slide)
+
+        imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
     }
 
     override fun addView(child: View?) {
@@ -94,6 +114,7 @@ open class StickySlideView @JvmOverloads constructor(
     }
 
     fun show() {
+        imm.hideSoftInputFromWindow(this.windowToken, 0)
         this.visibility = View.VISIBLE
         motionLayout.transitionToEnd()
     }
@@ -106,9 +127,9 @@ open class StickySlideView @JvmOverloads constructor(
         this.transitionListener = i
     }
 
-    protected fun transitionEnable(boolean: Boolean) {
-        if (transition.isEnabled != boolean) {
-            transition.setEnable(boolean)
+    protected fun transitionEnable(b: Boolean) {
+        if (transition.isEnabled != b) {
+            transition.setEnable(b)
         }
     }
 

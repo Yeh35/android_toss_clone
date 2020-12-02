@@ -26,7 +26,9 @@ class TextListStickySlideView constructor(
         }
 
     private val linearLayoutManager = LinearLayoutManager(context)
-    private val textListAdapter = TextListAdapter(ArrayList())
+    private val textListAdapter = TextListAdapter(this)
+
+    var onClickListener: ITextListStickySlideItemClickListener? = null
 
     init {
         this.recyclerView.layoutManager = linearLayoutManager
@@ -34,7 +36,8 @@ class TextListStickySlideView constructor(
     }
 
     class TextListAdapter internal constructor(
-        data: ArrayList<String>
+        val parentObject: TextListStickySlideView,
+        data: ArrayList<String> = ArrayList()
     ) : RecyclerView.Adapter<TextListAdapter.ViewHolder>() {
 
         internal var data: ArrayList<String> = data
@@ -45,7 +48,9 @@ class TextListStickySlideView constructor(
             }
 
         // 아이템 뷰를 저장하는 뷰홀더 클래스.
-        class ViewHolder internal constructor(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        class ViewHolder internal constructor(
+            itemView: View,
+        ) : RecyclerView.ViewHolder(itemView) {
             // 뷰 객체에 대한 참조. (hold strong reference)
             val textview: TextView = itemView.findViewById(R.id.tv_text)
         }
@@ -60,10 +65,15 @@ class TextListStickySlideView constructor(
 
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
             holder.textview.text = data[position]
+            holder.textview.setOnClickListener {
+                parentObject.close()
+                parentObject.onClickListener?.onClick(data[position])
+            }
         }
 
         override fun getItemCount(): Int {
             return data.size
         }
     }
+
 }

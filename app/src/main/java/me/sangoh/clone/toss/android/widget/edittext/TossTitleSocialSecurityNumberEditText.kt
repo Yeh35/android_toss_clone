@@ -68,10 +68,9 @@ class TossTitleSocialSecurityNumberEditText(context: Context, attrs: AttributeSe
                 error("Assertion failed")
             }
 
-            if (event.action == KeyEvent.ACTION_DOWN || keyCode != KeyEvent.KEYCODE_BACKSLASH) {
-                if (editFirst.text.length >= 6) {
+            if (event.action == KeyEvent.ACTION_DOWN) {
+                if (editFirst.text.length >= 5 && keyCode != KeyEvent.KEYCODE_DEL) {
                     editSecondOne.requestFocus()
-                    return@setOnKeyListener true
                 }
             }
 
