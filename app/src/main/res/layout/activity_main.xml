@@ -11,13 +11,24 @@
         tools:context="me.sangoh.clone.toss.android.view.activity.MainActivity">
 
 
-
         <me.sangoh.clone.toss.android.widget.BottomBar
+            android:id="@+id/bottomBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"/>
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="언젠가는 만들께요..\n (언젠가...)"
+            android:gravity="center"
+            app:layout_constraintBottom_toTopOf="@+id/bottomBar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
